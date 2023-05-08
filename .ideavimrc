@@ -1,0 +1,109 @@
+" Set Leader Key
+let mapleader = " "
+
+" Setup
+:set relativenumber
+:set number
+:set so=6
+:set ignorecase
+:set smartcase
+
+" Set kj as escape key
+imap KJ <ESC>o
+imap kj <Esc>
+set timeoutlen=400
+
+" Set idea to use system clipboard and vice vica
+set clipboard+=unnamed
+set clipboard+=ideaput
+
+" Set vimrc reloads
+nnoremap \e :e ~/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+
+nnoremap <s-TAB> :action PreviousTab<CR>
+nnoremap <TAB> :action NextTab<CR>
+nnoremap <Leader>q :action CloseContent<CR>
+
+nnoremap <leader>/ :action CommentByLineComment<CR>
+vnoremap <leader>/ :action CommentByLineComment<CR>
+
+nnoremap gb :action Back<CR>
+nnoremap gf :action Forward<CR>
+nnoremap <leader>a :action FileStructurePopup<CR>
+
+" Testing
+nnoremap <leader>bb :action ToggleLineBreakpoint<CR>
+nnoremap <leader>tt :action ContextRun<CR>
+nnoremap <leader>tb :action ContextDebug<CR>
+nnoremap <leader>td :action Run<CR>
+
+" Searching
+nnoremap <leader>fg :action FindInPath<CR>
+vnoremap <leader>fg :action FindInPath<CR>
+nnoremap <c-a> :action GotoAction<CR>
+nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <leader>u :action FindUsages<CR>
+
+nnoremap <leader>s viwy:/<c-r>+
+nnoremap <leader>r viwy:%s/<c-r>+//gI<left><left><left>
+
+vnoremap <leader>s y:/<c-r>+
+vnoremap <leader>r y:%s/<c-r>+//gI<left><left><left>
+
+" Blackholes
+nnoremap <leader>d "_d
+nnoremap <leader>p "_dP
+nnoremap <leader>wp viw"_dP
+nnoremap x "_x
+nnoremap X "_x
+
+vnoremap <leader>d "_d
+vnoremap <leader>p "_dP
+vnoremap <leader>wp viw"_dP
+vnoremap x "_x
+vnoremap X "_x
+
+" Marks
+nnoremap <leader>mh :action ToggleBookmark1<CR>
+nnoremap <leader>mj :action ToggleBookmark2<CR>
+nnoremap <leader>mk :action ToggleBookmark3<CR>
+nnoremap <leader>ml :action ToggleBookmark4<CR>
+
+nnoremap <leader>h :action GotoBookmark1<CR>
+nnoremap <leader>j :action GotoBookmark2<CR>
+nnoremap <leader>k :action GotoBookmark3<CR>
+nnoremap <leader>l :action GotoBookmark4<CR>
+
+nnoremap <leader>mn :action ToggleBookmarkA<CR>
+nnoremap <leader>m, :action ToggleBookmarkB<CR>
+nnoremap <leader>m. :action ToggleBookmarkC<CR>
+
+nnoremap <leader>n :action GotoBookmarkA<CR>
+nnoremap <leader>, :action GotoBookmarkB<CR>
+nnoremap <leader>. :action GotoBookmarkC<CR>
+
+
+" nnoremap <leader>m :action GotoNextBookmark<CR>
+" nnoremap <leader>M :action GotoPreviousBookmark<CR>
+
+" Center cursor on page up/down
+nnoremap <c-u> <c-u>zz
+nnoremap <c-d> <c-d>zz
+
+" Move selected lines up and down
+" No worky. fix wen time
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" delete from current position to start of line
+nnoremap X v0_d
+
+" Other stuff
+vnoremap < <gv
+vnoremap > >gv
+vnoremap <c-r> :action Redo
+nnoremap <c-r> :action RecentFiles<CR>
+nnoremap <leader>o :action ToggleDistractionFreeMode<CR>
+nnoremap <leader>f :action ReformatCode<CR>
+
