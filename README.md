@@ -1,7 +1,6 @@
-.ideavimrc > ~/.ideavimrc 
+# My Dotfiles
 
-alacritty.yml > ~/.config/alacritty/alacritty.yml
+Clone this repo to ~/dotfiles and run setup.sh 
 
-tmux.conf > ~/.config/tmux/tmux.conf
+This will create symlinks for the dotfiles in the correct places. 
 
-config.oy > ~/.config/qtile/config.py
