@@ -64,8 +64,8 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     # Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    # Key([mod, "control"], "q", lazy.spawn('i3lock -c 1e1f26'), desc="Lock screen"),
-    Key([mod, "control"], "q", lazy.spawn('rofi -show power-menu -modi power-menu:rofi-power-menu'), desc="Lock screen"),
+    Key([mod, "control"], "q", lazy.spawn('i3lock -c 1e1f26'), desc="Lock screen"),
+    Key([mod, "shift"], "p", lazy.spawn('rofi -show power-menu -modi power-menu:rofi-power-menu'), desc="Lock screen"),
     Key([mod, "shift"], "r", lazy.spawncmd(),
         desc="Spawn a command using a prompt widget"),
     Key([mod], "Space", lazy.spawn('rofi -show drun'),
@@ -87,14 +87,14 @@ keys = [
 # groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
 group_names = [
-    ("DEV"),
-    ("PYCHARM"),
-    ("TTY"),
-    ("TTY2"),
-    ("CHAT"),
-    ("MUS"),
-    ("VID"),
-    ("ZOOM"),
+    (""),
+    (""),
+    (""),
+    (""),
+    (""),
+    (""),
+    (""),
+    (""),
 ]
 
 groups = [Group(name) for name in group_names]
@@ -172,20 +172,12 @@ layouts = [
     ),
 ]
 
-# Layouts
+# Layouts - WIP
 # keys.extend([
 #    Key([mod], "f", lazy.group.setlayout('columns')), # Max Layout
    # Key([mod], "f", lazy.group.setlayout(layouts[3])), # Max Layout
 # ])
 
-##### COLORS #####
-# colors = [["#282a36", "#282a36"],  # panel background
-#           ["#434758", "#434758"],  # background for current screen tab
-#           ["#ffffff", "#ffffff"],  # font color for group names
-#           ["#ff5555", "#ff5555"],  # border line color for current tab
-#           ["#8d62a9", "#8d62a9"],  # border line color for other tab and odd widgets
-#           ["#668bd7", "#668bd7"],  # color for the even widgets
-#           ["#e1acff", "#e1acff"]]  # window name
 
 # layouts = [
 #     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
@@ -208,42 +200,12 @@ prompt = "{}@{}: ".format(os.environ["USER"], socket.gethostname())
 widget_defaults = dict(
     font="Ubuntu Mono",
     fontsize=12,
-    padding=2,
+    padding=10,
     background=colors[0],
 )
 extension_defaults = widget_defaults.copy()
 
-# screens = [
-#     Screen(
-#         top=bar.Bar(
-#             [
-#                 widget.CurrentLayout(),
-#                 widget.GroupBox(),
-#                 widget.Prompt(),
-#                 widget.WindowName(),
-#                 widget.Chord(
-#                     chords_colors={
-#                         "launch": ("#ff0000", "#ffffff"),
-#                     },
-#                     name_transform=lambda name: name.upper(),
-#                 ),
-#                 widget.TextBox("default config", name="default"),
-#                 widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
-#                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-#                 # widget.StatusNotifier(),
-#                 widget.Systray(),
-#                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-#                 widget.QuickExit(),
-#             ],
-#             24,
-#             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-#             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
-#         ),
-#     ),
-# ]
-
 ####### Widgets #######
-
 
 def init_widgets_list():
     return [
@@ -255,11 +217,11 @@ def init_widgets_list():
         ),
         widget.GroupBox(
             font="Ubuntu Bold",
-            fontsize=9,
+            fontsize=16,
             margin_y=3,
             margin_x=0,
             padding_y=5,
-            padding_x=5,
+            padding_x=10,
             borderwidth=3,
             active=colors[2],
             inactive=colors[2],
@@ -291,12 +253,17 @@ def init_widgets_list():
             background=colors[0],
             padding=0
         ),
+        widget.CurrentLayout(
+            foreground=colors[6],
+            background=colors[0],
+            padding=5
+        ),
         widget.TextBox(
             text=" 🌡",
             padding=2,
             foreground=colors[2],
             background=colors[0],
-            fontsize=11
+            fontsize=16
         ),
         widget.ThermalSensor(
             foreground=colors[2],
@@ -308,7 +275,7 @@ def init_widgets_list():
             padding=2,
             foreground=colors[4],
             background=colors[0],
-            fontsize=14
+            fontsize=19
         ),
         widget.TextBox(
             text="Updates",
@@ -321,11 +288,11 @@ def init_widgets_list():
             foreground=colors[3],
             background=colors[0],
             padding=0,
-            fontsize=14
+            fontsize=16
         ),
         widget.Memory(
             background=colors[0],
-            foreground=colors[5],
+            foreground=colors[3],
             padding=5
         ),
         widget.Net(
@@ -343,11 +310,6 @@ def init_widgets_list():
         ),
         widget.Volume(
             foreground=colors[3],
-            background=colors[0],
-            padding=5
-        ),
-        widget.CurrentLayout(
-            foreground=colors[4],
             background=colors[0],
             padding=5
         ),
@@ -372,14 +334,9 @@ def init_widgets_list():
 def init_widgets_screen1():
     return init_widgets_list()
 
-
-def init_widgets_screen2():
-    return init_widgets_list()
-
-
 def init_screens():
     return [
-        Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.95, size=20))
+        Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.85, size=30))
     ]
 
 

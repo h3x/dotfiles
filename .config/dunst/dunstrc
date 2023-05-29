@@ -35,7 +35,7 @@
     # Offset from the origin
     offset = 10x50
 
-    geometry="550x500-30+20"
+    geometry="550x500-30-30"
 
     # Scale factor. It is auto-detected if value is 0.
     scale = 0
@@ -75,7 +75,7 @@
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
-    separator_height = 1
+    separator_height = 2 
 
     # Padding between text and separator.
     padding = 10
@@ -88,7 +88,7 @@
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 2
+    frame_width = 3
 
     # Defines color of the frame around the notification window.
     # frame_color = "#282a36"
@@ -183,7 +183,7 @@
     hide_duplicate_count = false
 
     # Display indicators for URLs (U) and actions (A).
-    show_indicators = yes
+    show_indicators = no
 
     ### Icons ###
 
@@ -232,7 +232,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 15
+    corner_radius = 8
 
     # Ignore the dbus closeNotification message.
     # Useful to enforce the timeout set by dunst configuration. Without this
@@ -297,23 +297,23 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     # background = "#282a36"
     background = "#24283b"
-    foreground = "#9ece6a"
-    timeout = 4
+    foreground = "#2ac3de"
+    timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
     #new_icon = /path/to/icon
 
 [urgency_normal]
     background = "#24283b"
-    foreground = "#ff9e64"
-    timeout = 4
+    foreground = "#9ece6a"
+    timeout = 6
     # Icon for notifications with normal urgency, uncomment to enable
     #new_icon = /path/to/icon
 
 [urgency_critical]
     background = "#24283b"
     foreground = "#f7768e"
-    frame_color = "#ff5555"
-    timeout = 4
+    # frame_color = "#1a1b26"
+    timeout = 6
     # Icon for notifications with critical urgency, uncomment to enable
     #new_icon = /path/to/icon
 
