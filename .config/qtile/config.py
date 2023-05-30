@@ -9,6 +9,7 @@ from libqtile.lazy import lazy
 from typing import List
 from libqtile.utils import guess_terminal
 from themes.tokyonight import colors_init
+from spotify import Spotify
 
 colors = colors_init()
 
@@ -108,6 +109,7 @@ for i, (name) in enumerate(group_names, 1):
 groups.append(ScratchPad("scratchpad", [
     DropDown("term", "alacritty --class=scratch", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9),
     DropDown("ranger", "alacritty --class=ranger -e ranger", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9),
+    DropDown("slack", "slack", match=Match(wm_class='slack'), width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
     DropDown("volume", "pavucontrol", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
     DropDown("keeper", "keeperpasswordmanager", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
     DropDown("nemo", "nemo", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
@@ -123,7 +125,7 @@ keys.extend([
     Key([mod], "v", lazy.group['scratchpad'].dropdown_toggle('volume')),
     Key([mod], "p", lazy.group['scratchpad'].dropdown_toggle('keeper')),
     Key([mod], "m", lazy.group['scratchpad'].dropdown_toggle('nemo')),
-    Key([mod], "c", lazy.group['scratchpad'].dropdown_toggle('ranger')),
+    Key([mod], "c", lazy.group['scratchpad'].dropdown_toggle('slack')),
     Key([mod], "z", lazy.group['scratchpad'].dropdown_toggle('zoom')),
     # Key([mod], "b", lazy.group['scratchpad'].dropdown_toggle('news')),
     # Key([mod, "shift"], "n", lazy.group['scratchpad'].dropdown_toggle('term2')),
@@ -235,6 +237,12 @@ def init_widgets_list():
             foreground=colors[2],
             background=colors[0]
         ),
+        widget.Sep(
+            linewidth=0,
+            padding=40,
+            foreground=colors[2],
+            background=colors[0]
+        ),
         widget.Prompt(
             prompt=prompt,
             font="Ubuntu Mono",
@@ -242,16 +250,28 @@ def init_widgets_list():
             foreground=colors[3],
             background=colors[0]
         ),
+        widget.WindowName(
+            foreground=colors[6],
+            background=colors[0],
+            padding=0
+        ),
         widget.Sep(
             linewidth=0,
             padding=40,
             foreground=colors[2],
             background=colors[0]
         ),
-        widget.WindowName(
-            foreground=colors[6],
+        Spotify(
+            play_icon="",
+            pause_icon="",
+            foreground=colors[2],
             background=colors[0],
-            padding=0
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=40,
+            foreground=colors[2],
+            background=colors[0]
         ),
         widget.CurrentLayout(
             foreground=colors[6],
@@ -327,6 +347,12 @@ def init_widgets_list():
         widget.Systray(
             background=colors[0],
             padding=5
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=6,
+            foreground=colors[2],
+            background=colors[2]
         ),
     ]
 
