@@ -1,7 +1,7 @@
 configuration {
- modi: "window,drun,ssh,combi";
+ modi: "window,drun,ssh,combi,run";
  font: "hack 10";
- combi-modi: "window,drun,ssh";
+ combi-modi: "window,drun,ssh,run";
  }
 @theme "~/.config/rofi/themes/tokyo-night.rasi"
 

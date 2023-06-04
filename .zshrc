@@ -149,6 +149,10 @@ alias todo='cd ~/Junk/Docs && glow'
 alias dev='cd ~/dev'
 alias v='nvim'
 
+function b36() {
+    echo "base 10: $((36#$1))" 
+    echo "base 36: $((10#$1))" 
+}
 function startup() {
   cd ~/dev/alaya/webapp 
   tmux new-session -s "Appz" -d 

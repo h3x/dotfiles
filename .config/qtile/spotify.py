@@ -39,6 +39,8 @@ class Spotify(base.ThreadPoolText):
     defaults = [
         ("play_icon", "", "icon to display when playing music"),
         ("pause_icon", "", "icon to display when music paused"),
+        ("next_icon", "", "icon to display when music paused"),
+        ("previous_icon", "", "icon to display when music paused"),
         ("update_interval", 0.5, "polling rate in seconds"),
         ("format", "{icon} {artist}:{album} - {track}", "Spotify display format"),
     ]
@@ -50,6 +52,8 @@ class Spotify(base.ThreadPoolText):
             {
                 "Button3": self.toggle_between_groups,
                 "Button1": self.toggle_music,
+                "Button6": self.previous_song,
+                "Button7": self.next_song,
             }
         )
 
@@ -124,6 +128,17 @@ class Spotify(base.ThreadPoolText):
             shell=True,
         )
 
+    def next_song(self) -> None:
+        run(
+            "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next",
+            shell=True,
+        )
+
+    def previous_song(self) -> None:
+        run(
+            "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous",
+            shell=True,
+        )
     def get_proc_output(self, proc: CompletedProcess) -> str:
         if proc.stderr.decode("utf-8") != "":
             return (

@@ -10,6 +10,7 @@ from typing import List
 from libqtile.utils import guess_terminal
 from themes.tokyonight import colors_init
 from spotify import Spotify
+from spotify_controls import SpotifyControls
 
 colors = colors_init()
 
@@ -262,8 +263,19 @@ def init_widgets_list():
             background=colors[0]
         ),
         Spotify(
+            format="{artist}: {track}  {icon}",
             play_icon="",
             pause_icon="",
+            foreground=colors[2],
+            background=colors[0],
+        ),
+        SpotifyControls(
+            control='previous',
+            foreground=colors[2],
+            background=colors[0],
+        ),
+        SpotifyControls(
+            control='next',
             foreground=colors[2],
             background=colors[0],
         ),
