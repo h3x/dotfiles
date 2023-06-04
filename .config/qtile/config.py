@@ -8,7 +8,8 @@ from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, Key, Match
 from libqtile.lazy import lazy
 from typing import List
 from libqtile.utils import guess_terminal
-from themes.tokyonight import colors_init
+# from themes.tokyonight import colors_init
+from themes.rosepine import colors_init
 from spotify import Spotify
 
 colors = colors_init()
