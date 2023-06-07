@@ -10,11 +10,11 @@ DOTFILES=(
   ".config/tmux"
   ".config/qtile"
   ".config/rofi"
-  ".zshrc"
-  ".ideavimrc"
+  # ".zshrc"
+  # ".ideavimrc"
 )
 
 for dot in "${DOTFILES[@]}"; do
-    rm -rf "${HOME}/$dot"
+    # rm -rf "${HOME}/$dot"
     ln -sf "${DIR}/${dot}" "${HOME}/${dot}"
 done

@@ -93,8 +93,10 @@ nnoremap <c-d> <c-d>zz
 
 " Move selected lines up and down
 " No worky. fix wen time
-vnoremap J :m '>+1<CR>gv=gv
+" vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+vnoremap J :m '>+1<CR>V
+" vnoremap K :m '<-2<CR>V
 
 " delete from current position to start of line
 nnoremap X v0_d
