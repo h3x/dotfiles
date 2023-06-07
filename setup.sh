@@ -2,6 +2,7 @@
 
 # setup.sh
 # Symlink dotfiles to the correct locations
+# Commented out files have been omitted as to not mess with current configs. uncomment to include them in them
 DIR=$HOME/dotfiles
 DOTFILES=(
   ".config/alacritty"
@@ -10,11 +11,12 @@ DOTFILES=(
   ".config/tmux"
   ".config/qtile"
   ".config/rofi"
-  ".zshrc"
+  # ".zshrc"
   ".ideavimrc"
+  # ".config/nvim"
 )
 
 for dot in "${DOTFILES[@]}"; do
-    rm -rf "${HOME}/$dot"
+    # rm -rf "${HOME}/$dot"
     ln -sf "${DIR}/${dot}" "${HOME}/${dot}"
 done
