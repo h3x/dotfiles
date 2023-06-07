@@ -263,7 +263,7 @@ function gbranch {
         fi
 }
 
-alias nvim-chad="NVIM_APPNAME=nvchad nvim"
+alias nvchad="NVIM_APPNAME=nvchad nvim"
 
 function nvims() {
   items=("default" "NvChad")

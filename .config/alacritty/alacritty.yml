@@ -1,7 +1,7 @@
 # Color Scheme
 # Change the import to change the color scheme
 import:
-  - ~/dotfiles/.config/alacritty/themes/rose-pine.yml
+  - ~/dotfiles/.config/alacritty/themes/tokyo-night.yml
 
 live_config_reload: true
 
