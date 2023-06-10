@@ -1,5 +1,10 @@
 local plugins = {
-  
+   {
+    "mhanberg/elixir.nvim",
+     config = function()
+       require("elixir").setup()
+    end,
+   },
    {
     "max397574/better-escape.nvim",
     event = "InsertEnter",

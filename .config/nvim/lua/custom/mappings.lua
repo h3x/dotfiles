@@ -10,9 +10,14 @@ M.dap = {
 M.dap_python = {
   plugin = true,
   n = {
-    ["<leader>dbr"] = {
+    ["<leader>tt"] = {
       function()
         require('dap-python').test_method()
+      end
+    },
+   ["<leader>tr"] = {
+      function()
+       require('dap-python').debug_selection()
       end
     }
   }
