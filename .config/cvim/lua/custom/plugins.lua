@@ -6,6 +6,12 @@ local plugins = {
     end,
    },
    {
+     "windwo/nvim-autopairs",
+     config = function()
+         require('nvim-autopairs').setup()
+     end
+   },
+   {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
     config = function()
@@ -13,6 +19,13 @@ local plugins = {
         mapping = { "kj" },
       })
     end,
+  },
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    lazy = false,
+    config = function(_, opts)
+      require("nvim-dap-virtual-text").setup()
+    end
   },
   {
     "rcarriga/nvim-dap-ui",
