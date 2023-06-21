@@ -1,5 +1,11 @@
+-- local overrides = require("custom.configs.overrides")
 local plugins = {
-  
+   {
+    "mhanberg/elixir.nvim",
+     config = function()
+       require("elixir").setup()
+    end,
+   },
    {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
@@ -8,6 +14,13 @@ local plugins = {
         mapping = { "kj" },
       })
     end,
+  },
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    lazy = false,
+    config = function(_, opts)
+      require("nvim-dap-virtual-text").setup()
+    end
   },
   {
     "rcarriga/nvim-dap-ui",
@@ -34,6 +47,26 @@ local plugins = {
     end
   },
   {
+     "leoluz/nvim-dap-go",
+        ft = "go",
+        dependencies = "mfussenegger/nvim-dap",
+        config = function(_, opts)
+          require("dap-go").setup(opts)
+          require("core.utils").load_mappings("dap_go")
+        end
+  },
+    {
+        "olexsmir/gopher.nvim",
+        ft = "go",
+        config = function(_,opts)
+          require("gopher").setup(opts)
+          require("core.utils").load_mappings("gopher")
+        end,
+        build = function()
+          vim.cmd [[silent! GoInstallDeps]]
+        end,
+    },
+  {
     "mfussenegger/nvim-dap-python",
     ft = "python",
     dependencies = {
@@ -48,7 +81,7 @@ local plugins = {
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
-    ft = {"python"},
+        ft = "go",
     opts = function()
       return require "custom.configs.null-ls"
     end,
@@ -58,6 +91,7 @@ local plugins = {
     opts = {
       ensure_installed = {
         "black",
+        "gopls",
         "debugpy",
         "mypy",
         "ruff",
@@ -72,5 +106,26 @@ local plugins = {
       require "custom.configs.lspconfig"
     end,
   },
+    {
+        "neoclide/coc.nvim", branch = "release"
+    },
+    {
+        "yaegassy/coc-volar", run = "yarn install"
+    },
+    {
+        "yaegassy/coc-volar-tools", run = "yarn install"
+    },
+    {
+        "zbirenbaum/copilot.lua",
+        event = "InsertEnter",
+        cmd = "Copilot",
+        opts = function()
+          require("copilot").setup({
+            suggestion = {
+                auto_trigger = true,
+            }
+          })
+        end
+    },
 }
 return plugins
