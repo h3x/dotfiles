@@ -263,21 +263,21 @@ function gbranch {
         fi
 }
 
-alias nvchad="NVIM_APPNAME=nvchad nvim"
+alias cvim="NVIM_APPNAME=cvim nvim"
 
-function nvims() {
-  items=("default" "NvChad")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
-}
-
-bindkey -s ^a "nvims\n"
+# function nvims() {
+#   items=("default" "NvChad")
+#   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+#   if [[ -z $config ]]; then
+#     echo "Nothing selected"
+#     return 0
+#   elif [[ $config == "default" ]]; then
+#     config=""
+#   fi
+#   NVIM_APPNAME=$config nvim $@
+# }
+#
+# bindkey -s ^a "nvims\n"
 export EDITOR='/usr/bin/nvim'
 
 nvm use 18.15.0
