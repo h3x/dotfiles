@@ -142,8 +142,8 @@ alias dbgrep='grep -e "\"mysql\": {" -e \"jobs\" -A 12'
 alias develop='git checkout develop'
 alias nvimconf='cd ~/.config/nvim/ && nvim .'
 alias updatedb='cd ~/dev/alaya/db-migrations && ./update_mysql.sh'
-# alias tn='tmuxifier new-session'
-# alias tl='tmuxifier load-session'
+alias tn='tmuxifier new-session'
+alias tl='tmuxifier load-session'
 alias nb='docker run -v "$PWD:/home/nabu" --rm -ti 406883902139.dkr.ecr.ca-central-1.amazonaws.com/nabu-cli-client'
 alias todo='cd ~/Junk/Docs && glow'
 alias dev='cd ~/dev'
@@ -265,6 +265,7 @@ function gbranch {
 
 alias nvchad="NVIM_APPNAME=nvchad nvim"
 alias lazy="NVIM_APPNAME=lazy nvim"
+alias cvim="NVIM_APPNAME=cvim nvim"
 
 function nvims() {
   items=("default" "NvChad")
@@ -278,14 +279,15 @@ function nvims() {
   NVIM_APPNAME=$config nvim $@
 }
 
+
 # bindkey -s ^a "nvims\n"
 export EDITOR='/usr/bin/nvim'
 
 nvm use 18.15.0
 
-# eval "$(tmuxifier init -)"
+eval "$(tmuxifier init -)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fpath+=${ZDOTDIR:-~}/.zsh_functions
-# eval "$(starship init zsh)"
+eval "$(starship init zsh)"

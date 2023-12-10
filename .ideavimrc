@@ -101,6 +101,11 @@ vnoremap J :m '>+1<CR>V
 " delete from current position to start of line
 nnoremap X v0_d
 
+" Copilot
+" nnoremap N :action copilot.requestCompletions<CR>
+" inoremap <C-n> <C-o>:action copilot.cycleNextInlays<CR>
+" inoremap <C-y> <C-o>:action copilot.applyInlays<CR>
+
 " Other stuff
 vnoremap < <gv
 vnoremap > >gv

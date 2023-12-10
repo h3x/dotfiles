@@ -346,10 +346,34 @@ def init_widgets_list():
             background=colors[0],
             padding=5
         ),
+        widget.TextBox(
+            foreground=colors[5],
+            text=" UTC:",
+            background=colors[0],
+            padding=0
+        ),
+        widget.Clock(
+            foreground=colors[5],
+            background=colors[0],
+            format="%A, %B %d  [ %H:%M ]",
+            timezone='Etc/UTC'
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=10,
+            foreground=colors[2],
+            background=colors[0]
+        ),
         widget.Clock(
             foreground=colors[2],
             background=colors[0],
             format="%A, %B %d  [ %H:%M ]"
+        ),
+        widget.Sep(
+            linewidth=0,
+            padding=10,
+            foreground=colors[2],
+            background=colors[0]
         ),
         widget.Sep(
             linewidth=0,
