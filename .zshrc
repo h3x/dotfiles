@@ -112,7 +112,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH="/opt/:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
-export PATH="$HOME/.tmuxifier/bin:$PATH"
+# export PATH="$HOME/.tmuxifier/bin:$PATH"
 
 export NABU_TENANT_FOLDER="$ALAYACARE_HOME/nabu/web/api/v1/tenant"
 # export VISUAL=lvim
@@ -142,8 +142,8 @@ alias dbgrep='grep -e "\"mysql\": {" -e \"jobs\" -A 12'
 alias develop='git checkout develop'
 alias nvimconf='cd ~/.config/nvim/ && nvim .'
 alias updatedb='cd ~/dev/alaya/db-migrations && ./update_mysql.sh'
-alias tn='tmuxifier new-session'
-alias tl='tmuxifier load-session'
+# alias tn='tmuxifier new-session'
+# alias tl='tmuxifier load-session'
 alias nb='docker run -v "$PWD:/home/nabu" --rm -ti 406883902139.dkr.ecr.ca-central-1.amazonaws.com/nabu-cli-client'
 alias todo='cd ~/Junk/Docs && glow'
 alias dev='cd ~/dev'
@@ -153,19 +153,19 @@ function b36() {
     echo "base 10: $((36#$1))" 
     echo "base 36: $((10#$1))" 
 }
-function startup() {
-  cd ~/dev/alaya/webapp 
-  tmux new-session -s "Appz" -d 
-  tmux send-keys 'npm run start:webapp:federated' Enter
-  tmux split-window -v
-  tmux send-keys 'dc up -d' Enter
-  tmux -2 attach-session -d
+# function startup() {
+#   cd ~/dev/alaya/webapp 
+#   tmux new-session -s "Appz" -d 
+#   tmux send-keys 'npm run start:webapp:federated' Enter
+#   tmux split-window -v
+#   tmux send-keys 'dc up -d' Enter
+#   tmux -2 attach-session -d
   # GREEN="\e[32m"
   # RED="\e[1;31m" 
   # echo -e "${RED}Starting Up...."
   # echo -e "${GREEN}"
   # cd ~/dev/alaya/webapp && dc up -d && npm run start:webapp:federated
-} 
+# } 
 
 function phpsucks() {
   cd ~/dev/alaya/phpapp/
@@ -264,6 +264,7 @@ function gbranch {
 }
 
 alias nvchad="NVIM_APPNAME=nvchad nvim"
+alias lazy="NVIM_APPNAME=lazy nvim"
 
 function nvims() {
   items=("default" "NvChad")
@@ -277,14 +278,14 @@ function nvims() {
   NVIM_APPNAME=$config nvim $@
 }
 
-bindkey -s ^a "nvims\n"
+# bindkey -s ^a "nvims\n"
 export EDITOR='/usr/bin/nvim'
 
 nvm use 18.15.0
 
-eval "$(tmuxifier init -)"
+# eval "$(tmuxifier init -)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fpath+=${ZDOTDIR:-~}/.zsh_functions
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"

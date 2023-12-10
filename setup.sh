@@ -15,7 +15,7 @@ DOTFILES=(
   ".ideavimrc"
   # ".config/nvim"
 )
-
+# ln -sf .config/cvim ~/.config/cvim
 for dot in "${DOTFILES[@]}"; do
     # rm -rf "${HOME}/$dot"
     ln -sf "${DIR}/${dot}" "${HOME}/${dot}"

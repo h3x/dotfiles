@@ -1,0 +1,11 @@
+-- require("copilot").setup({
+--     suggestion = {
+--         enabled = true,
+--         auto_trigger =true,
+--         keymap = {
+--             accept = "<Tab>",
+--             next = "<C-n>",
+--             prev = "<C-p>",
+--         }
+--     }
+-- })
