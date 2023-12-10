@@ -112,7 +112,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH="/opt/:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
-# export PATH="$HOME/.tmuxifier/bin:$PATH"
+export PATH="$HOME/.tmuxifier/bin:$PATH"
 
 export NABU_TENANT_FOLDER="$ALAYACARE_HOME/nabu/web/api/v1/tenant"
 # export VISUAL=lvim
