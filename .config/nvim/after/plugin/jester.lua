@@ -47,7 +47,7 @@ dap.configurations.javascript = {
   },
 }
 
-vim.keymap.set("n", "<leader>tt", ':lua require"jester".run()<CR>')
+-- vim.keymap.set("n", "<leader>tt", ':lua require"jester".run()<CR>')
 vim.keymap.set("n", "<leader>tf", ':lua require"jester".run_file()<CR>')
 vim.keymap.set("n", "<leader>tl", ':lua require"jester".run_last()<CR>')
 vim.keymap.set("n", "<leader>tb", ':lua require"jester".debug()<CR>')

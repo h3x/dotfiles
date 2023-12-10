@@ -99,4 +99,22 @@ return require('packer').startup(function(use)
     use { "leoluz/nvim-dap-go" }
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
     use { 'theHamsta/nvim-dap-virtual-text' }
+
+    -- Copilot
+    use {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function() require("copilot").setup({
+        suggestion = {
+            enabled = true,
+            auto_trigger =true,
+            keymap = {
+                accept = "<Tab>",
+                next = "<C-n>",
+                prev = "<C-p>",
+            },
+        }
+        }) end,
+    }
 end)

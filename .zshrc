@@ -153,19 +153,19 @@ function b36() {
     echo "base 10: $((36#$1))" 
     echo "base 36: $((10#$1))" 
 }
-function startup() {
-  cd ~/dev/alaya/webapp 
-  tmux new-session -s "Appz" -d 
-  tmux send-keys 'npm run start:webapp:federated' Enter
-  tmux split-window -v
-  tmux send-keys 'dc up -d' Enter
-  tmux -2 attach-session -d
+# function startup() {
+#   cd ~/dev/alaya/webapp 
+#   tmux new-session -s "Appz" -d 
+#   tmux send-keys 'npm run start:webapp:federated' Enter
+#   tmux split-window -v
+#   tmux send-keys 'dc up -d' Enter
+#   tmux -2 attach-session -d
   # GREEN="\e[32m"
   # RED="\e[1;31m" 
   # echo -e "${RED}Starting Up...."
   # echo -e "${GREEN}"
   # cd ~/dev/alaya/webapp && dc up -d && npm run start:webapp:federated
-} 
+# } 
 
 function phpsucks() {
   cd ~/dev/alaya/phpapp/
@@ -263,20 +263,23 @@ function gbranch {
         fi
 }
 
+alias nvchad="NVIM_APPNAME=nvchad nvim"
+alias lazy="NVIM_APPNAME=lazy nvim"
 alias cvim="NVIM_APPNAME=cvim nvim"
 
-# function nvims() {
-#   items=("default" "NvChad")
-#   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-#   if [[ -z $config ]]; then
-#     echo "Nothing selected"
-#     return 0
-#   elif [[ $config == "default" ]]; then
-#     config=""
-#   fi
-#   NVIM_APPNAME=$config nvim $@
-# }
-#
+function nvims() {
+  items=("default" "NvChad")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
+
 # bindkey -s ^a "nvims\n"
 export EDITOR='/usr/bin/nvim'
 
