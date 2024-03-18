@@ -18,3 +18,10 @@ vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left wind
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- Copilot
+vim.keymap.set('n', '<leader>co', ':CopilotChatOpen<CR>', { desc = 'Open [C]opilot chat' })
+vim.keymap.set('n', '<leader>ce', ':CopilotChatExplain<CR>', { desc = 'Open [C]opilot [E]xplain' })
+
+-- Lazygit
+vim.keymap.set('n', '<leader>lg', ':LazyGit<CR>', { desc = 'Open [L]azy[G]it' })

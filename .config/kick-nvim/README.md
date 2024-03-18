@@ -26,7 +26,7 @@ vim-sleuth.lua
 whichkey.lua
 
 ## TODO
-- [ ] Get copilot working properly
-- [ ] Get copilot chat working properly
+- [x] Get copilot working properly
+- [x] Get copilot chat working properly
 - [ ] Maybe chat gpt?
 
