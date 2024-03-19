@@ -7,7 +7,7 @@ local telescope = require("telescope.builtin")
 map("n", "Q", "@qj", { desc = "Run Q Macro", remap = true })
 map("x", "Q", ":norm @q<CR>", { desc = "Run Q Macro", remap = true })
 
-map("n", "J", "mzJ`z", { desc = "", remap = true })
+-- map("n", "J", "mzJ`z", { desc = "", remap = true })
 map("n", "<C-d>", "<C-d>zz", { desc = "", remap = true })
 map("n", "<C-u>", "<C-u>zz", { desc = "", remap = true })
 map({ "n", "v" }, "<leader>d", [["_d]], { desc = "", remap = true })

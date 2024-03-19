@@ -1,6 +1,6 @@
 require 'adam.options'
 require 'adam.autocomands'
-require 'adam.keymaps-simple'
+require 'adam.keymaps'
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -12,6 +12,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- NOTE: [[ Configure and install plugins ]]
 -- :Lazy update
+
 local opts = {
   ui = {
     icons = vim.g.have_nerd_font and {} or {

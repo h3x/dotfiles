@@ -113,6 +113,7 @@ export PATH="/opt/:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$HOME/.tmuxifier/bin:$PATH"
+export PATH="$HOME/Applications:$PATH"
 
 export NABU_TENANT_FOLDER="$ALAYACARE_HOME/nabu/web/api/v1/tenant"
 # export VISUAL=lvim
@@ -122,32 +123,79 @@ export NABU_TENANT_FOLDER="$ALAYACARE_HOME/nabu/web/api/v1/tenant"
 # Aliases
 alias zsource="source ~/.zshrc"
 alias gpush='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
-alias wa='cd ~/dev/alaya/webapp'
-alias aa='cd ~/dev/alaya/api.accounting'
-alias ca='cd ~/dev/alaya/api.accounting/api.common'
-alias pa='cd ~/dev/alaya/phpapp'
-alias da='cd ~/dev/alaya/db-migrations'
+
+# Docker containers
+# alias wa='cd ~/dev/alaya/webapp'
+# alias aa='cd ~/dev/alaya/api.accounting'
+# alias ca='cd ~/dev/alaya/api.accounting/api.common'
+# alias pa='cd ~/dev/alaya/phpapp'
+# alias da='cd ~/dev/alaya/db-migrations'
+# alias ap='cd ~/dev/alaya/api.printing'
+# alias sa='cd ~/dev/alaya/api.scheduler'
+
+alias wa='cd ~/alayadev/accloud-lde/services/webapp'
+alias waa='cd ~/alayadev/accloud-lde/services/webapp/web/js/vue-components'
+alias aa='cd ~/alayadev/accloud-lde/services/api.accounting'
+alias ca='cd ~/alayadev/accloud-lde/services/api.accounting/api.common'
+alias pa='cd ~/alayadev/accloud-lde/services/phpapp'
+alias da='cd ~/alayadev/accloud-lde/services/db-migrations'
+alias ap='cd ~/alayadev/accloud-lde/services/api.printing'
+alias sa='cd ~/alayadev/accloud-lde/services/api.scheduler'
+# /home/developer1/alayadev/accloud-lde/services/webapp
+
 alias dpld='dc exec -u www-data app composer dump-autoload'
 # alias phpsucks='./exec composer dump-autoload'
-alias pullall='git-submodules "git checkout develop && git pull && git submodule update"'
+alias pullall='for i in */.git; do ( echo $i; cd $i/..; git checkout develop && git pull; ); done'
+# alias pullall='git-submodules "git checkout develop && git pull && git submodule update"'
 alias gch='git checkout -b'
 alias watest='npm run test --'
 alias dcclean="docker system prune -a -f"
 alias makemigrations="cd ~/dev/alaya && make cli-migrations"
 alias wip="git add . && git commit -m 'WIP' -n"
 alias unwip="git reset HEAD^"
-alias localdb='cat ~/dev/alaya/nabu/web/api/v1/tenant/alayadev.json | grep -e \"mysql\": -e \"jobs\" -A 7'
-alias wiki='cd ~/Desktop/wikijs && docker compose up -d'
+alias localdb='cat ~/alayadev/accloud-lde/services/nabu/web/api/v1/tenant/alayadev.json | grep -e \"mysql\": -e \"jobs\" -A 7'
+# alias wiki='cd ~/Desktop/wikijs && docker compose up -d'
 alias dbgrep='grep -e "\"mysql\": {" -e \"jobs\" -A 12'
 alias develop='git checkout develop'
 alias nvimconf='cd ~/.config/nvim/ && nvim .'
 alias updatedb='cd ~/dev/alaya/db-migrations && ./update_mysql.sh'
 alias tn='tmuxifier new-session'
 alias tl='tmuxifier load-session'
-alias nb='docker run -v "$PWD:/home/nabu" --rm -ti 406883902139.dkr.ecr.ca-central-1.amazonaws.com/nabu-cli-client'
+# alias nb='docker run -v "$PWD:/home/nabu" --rm -ti 406883902139.dkr.ecr.ca-central-1.amazonaws.com/nabu-cli-client'
+alias nb='docker run -v "$HOME:/home/nabu" --rm -ti 406883902139.dkr.ecr.ca-central-1.amazonaws.com/nabu-cli-client:v0.0.20'
 alias todo='cd ~/Junk/Docs && glow'
 alias dev='cd ~/dev'
-alias v='nvim'
+alias v='lazy'
+alias confd='echo DOCKER_XDEBUG_HOST $DOCKER_XDEBUG_HOST && echo DOCKER_XDEBUG_PORT $DOCKER_XDEBUG_PORT && echo DOCKER_REGISTRY  $DOCKER_REGISTRY'
+alias dcmin=' dc up -d nabu apischeduler_worker db maildev apiconfig apiclinical apipatients_worker nginx apibackgroundjobs apiemployees redis apiemployees_worker pg apiauth redis-maps apimaps apipatients app_worker app apiusers apiauth2 apimaps_worker apimaps apischeduler apiaccounting_worker apiaccounting apifiles apisupplies'
+
+alias dots='cd ~/dotfiles'
+
+function patest() {
+    ALAYA_LOCATION=/home/developer1/alayadev/accloud-lde/services/phpapp
+    
+    # setup
+    export WORKSPACE=$(pwd)
+    export MIGRATION_TAG=develop
+
+    # export DOCKER_IMAGE=406883902139.dkr.ecr.ca-central-1.amazonaws.com/phpapp:develop
+
+    # docker-compose -f $ALAYA_LOCATION/docker-compose.build.yml up -d db redis redis-cache
+    # docker-compose -f $ALAYA_LOCATION/docker-compose.build.yml up -d app
+    # docker-compose -f $ALAYA_LOCATION/docker-compose.build.yml run db-migrations ./create.sh -d -h db -e mysql -n test_mysql -t mysql -u root -p root -l root -r root -P 3306 -a dev
+
+    #test runner
+    docker-compose -f docker-compose.build.yml exec --user 0 app vendor/bin/phpunit $1
+}
+function fetchd() {
+  git stash
+  BB=$(git branch | grep "*" | awk '{ print $2 }')
+  git checkout develop  
+  git pull
+  git checkout $BB
+  git merge develop
+  git stash pop
+}
 
 function b36() {
     echo "base 10: $((36#$1))" 
@@ -168,8 +216,8 @@ function b36() {
 # } 
 
 function phpsucks() {
-  cd ~/dev/alaya/phpapp/
-  phpapp;
+  # cd ~/dev/alaya/phpapp/
+  pa
   rm -rf var/log/*
   sudo chown -R developer1:developer1 var/cache;
   sudo chmod -R 777 var/log
@@ -211,6 +259,10 @@ function ecrconnect() {
     sleep 2
     aws ecr get-login-password --profile codeartifact --region ca-central-1 | docker login --username AWS --password-stdin 406883902139.dkr.ecr.ca-central-1.amazonaws.com
     export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact --profile codeartifact get-authorization-token --domain alayacare --domain-owner 406883902139 --query authorizationToken --output text`
+}
+
+function awsconnect() {
+  aws s3 ls --profile TeamWombats
 }
 
 function tenantconnect() {
@@ -266,6 +318,8 @@ function gbranch {
 alias nvchad="NVIM_APPNAME=nvchad nvim"
 alias lazy="NVIM_APPNAME=lazy nvim"
 alias cvim="NVIM_APPNAME=cvim nvim"
+alias cypress="cd ~/alayadev/accloud-lde/alaya-cypress-rcm && npm run ui -- --CYPRESS.config.baseUrl=http://alayadev.localhost"
+alias auto="cd ~/alayadev/accloud-lde/alaya-cypress-rcm && node mapi/boot --mode=ui --CYPRESS.config.baseUrl=http://alayadev.localhost --CYPRESS.spec=\"/home/developer1/tmp/**/*.cy.js\"",
 
 function nvims() {
   items=("default" "NvChad")
@@ -277,6 +331,35 @@ function nvims() {
     config=""
   fi
   NVIM_APPNAME=$config nvim $@
+}
+
+function _vpn_action() {
+  vpn_name=$1
+
+  # if openvpn3 is not installed, warn and exit
+  if ! command -v openvpn3 &> /dev/null; then
+    echo "openvpn3 is not installed"
+    return
+  fi
+
+  # Is the VPN already running?
+  if openvpn3 sessions-list | grep -q $vpn_name; then
+    echo "VPN $vpn_name is running, stopping it"
+    openvpn3 session-manage --disconnect --config $vpn_name
+  else
+    openvpn3 session-start --config $vpn_name
+  fi
+}
+function vpnrc() {
+  _vpn_action "rc.can1"
+}
+
+function vpnnon() {
+  _vpn_action "nonprod.can1"
+}
+
+function vpnaus() {
+  _vpn_action "ausprod.can1"
 }
 
 
@@ -291,3 +374,6 @@ eval "$(tmuxifier init -)"
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 eval "$(starship init zsh)"
+
+# Alaya
+[ -f /home/developer1/alayadev/accloud-lde/profile/alaya_init.sh ] && source /home/developer1/alayadev/accloud-lde/profile/alaya_init.sh

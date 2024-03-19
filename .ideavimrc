@@ -7,6 +7,7 @@ let mapleader = " "
 :set so=6
 :set ignorecase
 :set smartcase
+:set incsearch
 
 " Set kj as escape key
 imap KJ <ESC>o
@@ -14,8 +15,8 @@ imap kj <Esc>
 set timeoutlen=400
 
 " Set idea to use system clipboard and vice vica
-set clipboard+=unnamed
-set clipboard+=ideaput
+set clipboard*=unnamed
+set clipboard*=ideaput
 
 " Set vimrc reloads
 nnoremap \e :e ~/.ideavimrc<CR>
@@ -45,7 +46,9 @@ nnoremap <c-a> :action GotoAction<CR>
 nnoremap <leader>ff :action GotoFile<CR>
 nnoremap <leader>u :action FindUsages<CR>
 
-nnoremap <leader>s viwy:/<c-r>+
+" nnoremap <leader>s viwy:/<c-r>+
+nnoremap <leader>s viw"ky:/<c-r>k
+
 nnoremap <leader>r viwy:%s/<c-r>+//gI<left><left><left>
 
 vnoremap <leader>s y:/<c-r>+
@@ -83,6 +86,9 @@ nnoremap <leader>n :action GotoBookmarkA<CR>
 nnoremap <leader>, :action GotoBookmarkB<CR>
 nnoremap <leader>. :action GotoBookmarkC<CR>
 
+" Run Q Macro
+map Q @qj
+vmap Q :norm @q<CR>
 
 " nnoremap <leader>m :action GotoNextBookmark<CR>
 " nnoremap <leader>M :action GotoPreviousBookmark<CR>
@@ -99,7 +105,7 @@ vnoremap J :m '>+1<CR>V
 " vnoremap K :m '<-2<CR>V
 
 " delete from current position to start of line
-nnoremap X v0_d
+" nnoremap X v0_d
 
 " Copilot
 " nnoremap N :action copilot.requestCompletions<CR>
@@ -113,4 +119,7 @@ vnoremap <c-r> :action Redo
 nnoremap <c-r> :action RecentFiles<CR>
 nnoremap <leader>o :action ToggleDistractionFreeMode<CR>
 nnoremap <leader>f :action ReformatCode<CR>
+nnoremap <c-k> :action ShowErrorDescription<CR>
 
+" Fix paste in visual mode breaking in v2.5.1
+" vnoremap p ""p
