@@ -1,0 +1,148 @@
+alias auto="cd ~/alayadev/accloud-lde/alaya-cypress-rcm && node mapi/boot --mode=ui --CYPRESS.config.baseUrl=http://alayadev.localhost --CYPRESS.spec=\"/home/developer1/tmp/**/*.cy.js\"",
+
+alias cypress="cd ~/alayadev/accloud-lde/alaya-cypress-rcm && npm run ui -- --CYPRESS.config.baseUrl=http://alayadev.localhost"
+
+# Docker containers
+alias wa='cd ~/alayadev/accloud-lde/services/webapp'
+alias waa='cd ~/alayadev/accloud-lde/services/webapp/web/js/vue-components'
+alias aa='cd ~/alayadev/accloud-lde/services/api.accounting'
+alias ca='cd ~/alayadev/accloud-lde/services/api.accounting/api.common'
+alias pa='cd ~/alayadev/accloud-lde/services/phpapp'
+alias da='cd ~/alayadev/accloud-lde/services/db-migrations'
+alias ap='cd ~/alayadev/accloud-lde/services/api.printing'
+alias sa='cd ~/alayadev/accloud-lde/services/api.scheduler'
+
+alias dpld='dc exec -u www-data app composer dump-autoload'
+# alias phpsucks='./exec composer dump-autoload'
+# alias pullall='git-submodules "git checkout develop && git pull && git submodule update"'
+alias watest='npm run test --'
+alias dcclean="docker system prune -a -f"
+alias makemigrations="cd ~/dev/alaya && make cli-migrations"
+alias localdb='cat ~/alayadev/accloud-lde/services/nabu/web/api/v1/tenant/alayadev.json | grep -e \"mysql\": -e \"jobs\" -A 7'
+# alias wiki='cd ~/Desktop/wikijs && docker compose up -d'
+alias dbgrep='grep -e "\"mysql\": {" -e \"jobs\" -A 12'
+alias develop='git checkout develop'
+alias updatedb='cd ~/dev/alaya/db-migrations && ./update_mysql.sh'
+# alias nb='docker run -v "$PWD:/home/nabu" --rm -ti 406883902139.dkr.ecr.ca-central-1.amazonaws.com/nabu-cli-client'
+alias nb='docker run -v "$HOME:/home/nabu" --rm -ti 406883902139.dkr.ecr.ca-central-1.amazonaws.com/nabu-cli-client:v0.0.20'
+alias todo='cd ~/Junk/Docs && glow'
+alias dev='cd ~/dev'
+alias v='nvim'
+alias confd='echo DOCKER_XDEBUG_HOST $DOCKER_XDEBUG_HOST && echo DOCKER_XDEBUG_PORT $DOCKER_XDEBUG_PORT && echo DOCKER_REGISTRY  $DOCKER_REGISTRY'
+alias dcmin=' dc up -d nabu apischeduler_worker db maildev apiconfig apiclinical apipatients_worker nginx apibackgroundjobs apiemployees redis apiemployees_worker pg apiauth redis-maps apimaps apipatients app_worker app apiusers apiauth2 apimaps_worker apimaps apischeduler apiaccounting_worker apiaccounting apifiles apisupplies'
+
+
+function phpsucks() {
+  pa
+  rm -rf var/log/*
+  sudo chown -R developer1:developer1 var/cache;
+  sudo chmod -R 777 var/log
+  ./exec composer dump-autoload
+}
+
+function ng() {
+    nabu get "v1/tenant/$1?environment=$2"
+}
+
+function patest() {
+    ALAYA_LOCATION=/home/developer1/alayadev/accloud-lde/services/phpapp
+    
+    # setup
+    export WORKSPACE=$(pwd)
+    export MIGRATION_TAG=develop
+
+    #test runner
+    docker-compose -f docker-compose.build.yml exec --user 0 app vendor/bin/phpunit $1
+}
+
+function _vpn_action() {
+  vpn_name=$1
+
+  # if openvpn3 is not installed, warn and exit
+  if ! command -v openvpn3 &> /dev/null; then
+    echo "openvpn3 is not installed"
+    return
+  fi
+
+  # Is the VPN already running?
+  if openvpn3 sessions-list | grep -q $vpn_name; then
+    echo "VPN $vpn_name is running, stopping it"
+    openvpn3 session-manage --disconnect --config $vpn_name
+  else
+    openvpn3 session-start --config $vpn_name
+  fi
+}
+
+function vpnrc() {
+  _vpn_action "rc.can1"
+}
+
+function vpnnon() {
+  _vpn_action "nonprod.can1"
+}
+
+function vpnaus() {
+  _vpn_action "ausprod.can1"
+}
+
+function npmconnect() {
+    saml2aws login --profile codeartifact -a codeartifact
+    aws codeartifact login --tool npm --repository alaya-npm --domain alayacare --profile codeartifact
+}
+
+function pipconnect() {
+    saml2aws login --profile codeartifact -a codeartifact
+    export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact --profile codeartifact get-authorization-token --domain alayacare --domain-owner 406883902139 --query authorizationToken --output text`
+    pip3 config set global.index-url https://aws:$CODEARTIFACT_AUTH_TOKEN@alayacare-406883902139.d.codeartifact.us-east-1.amazonaws.com/pypi/alaya-python/simple/
+}
+
+function ecrconnect() {
+    saml2aws login --profile codeartifact -a codeartifact
+    sleep 2
+    aws ecr get-login-password --profile codeartifact --region ca-central-1 | docker login --username AWS --password-stdin 406883902139.dkr.ecr.ca-central-1.amazonaws.com
+    export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact --profile codeartifact get-authorization-token --domain alayacare --domain-owner 406883902139 --query authorizationToken --output text`
+}
+
+function awsconnect() {
+  aws s3 ls --profile TeamWombats
+}
+
+function tenantconnect() {
+    cd $NABU_TENANT_FOLDER
+    
+    ng $1 $2 > $1.localhost.json
+    ln -sf $1.localhost.json $1.docker.json
+    ln -sf $1.localhost.json $1.json
+
+    
+    # browse $NABU_TENANT_FOLDER
+    
+    read "REPLY?Edit the tenant file (\"$NABU_TENANT_FOLDER/$1.localhost.json\") to fix the URLs? [y/n]"
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+    	$EDITOR $NABU_TENANT_FOLDER/$1.json
+    fi
+    
+    read "REPLY?Edit the hosts file to add the tenant domain pointing to localhost? [y/n]"
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+    	sudo $EDITOR /etc/hosts
+    fi
+    
+    read "REPLY?Edit the docker-compose.yml file to add the network alias? This will restart nginx. [y/n]"
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+    	$EDITOR $ALAYACARE_HOME/docker-compose.yml
+    	reup nginx
+    fi
+    
+    cd - > /dev/null
+}
+
+export NABU_TENANT_FOLDER="$ALAYACARE_HOME/nabu/web/api/v1/tenant"
+
+[ -f /home/developer1/.alaya/.alaya_profile ] && source /home/developer1/.alaya/.alaya_profile
+[ -f /home/developer1/alayadev/accloud-lde/profile/alaya_init.sh ] && source /home/developer1/alayadev/accloud-lde/profile/alaya_init.sh
