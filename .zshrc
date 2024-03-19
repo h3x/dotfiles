@@ -80,7 +80,7 @@ function nvims() {
 
 # Alaya
 [ $USER = "developer1" ] &&
-[ -f /home/developer1/dotfiles/.workrc] && source /home/developer1/dotfiles/.workrc
+[ -f /home/developer1/dotfiles/.workrc ] && source /home/developer1/dotfiles/.workrc
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
