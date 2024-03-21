@@ -43,3 +43,9 @@ vim.opt.scrolloff = 10
 
 -- [[ Basic Keymaps ]]
 vim.opt.hlsearch = true
+
+-- Set tabs
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true

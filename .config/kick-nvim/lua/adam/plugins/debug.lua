@@ -1,22 +1,12 @@
--- debug.lua
---
--- Shows how to use the DAP plugin to debug your code.
---
--- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
-
 return {
-  -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
-  -- NOTE: And you can specify dependencies as well
   dependencies = {
-    -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
-
-    -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
+    'theHamsta/nvim-dap-virtual-text',
+    'mfussenegger/nvim-dap-python',
+    'rcarriga/cmp-dap',
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
@@ -26,19 +16,13 @@ return {
     local dap = require 'dap'
     local dapui = require 'dapui'
 
+    local path = '~/.local/share/nvim/mason/packages/debugpy/venv/bin/python'
+    require('dap-python').setup(path)
+
     require('mason-nvim-dap').setup {
-      -- Makes a best effort to setup the various debuggers with
-      -- reasonable debug configurations
       automatic_setup = true,
-
-      -- You can provide additional configuration to the handlers,
-      -- see mason-nvim-dap README for more information
       handlers = {},
-
-      -- You'll need to check that you have the required things installed
-      -- online, please don't ask me how to install them :)
       ensure_installed = {
-        -- Update this to ensure that you have the debuggers for the langs you want
         'delve',
       },
     }
@@ -53,12 +37,33 @@ return {
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint' })
 
+    local hide_info = function()
+      print 'hide'
+      vim.diagnostic.disable()
+      vim.api.nvim_command ':Gitsigns toggle_current_line_blame'
+    end
+
+    local show_info = function()
+      vim.diagnostic.enable()
+      vim.api.nvim_command ':Gitsigns toggle_current_line_blame'
+    end
+
+    dap.listeners.after.event_initialized['dapui_config'] = function()
+      hide_info()
+      dapui.open {}
+    end
+    dap.listeners.before.event_terminated['dapui_config'] = function()
+      show_info()
+      dapui.close {}
+    end
+    dap.listeners.before.event_exited['dapui_config'] = function()
+      show_info()
+      dapui.close {}
+    end
+
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
     dapui.setup {
-      -- Set icons to characters that are more likely to work in every terminal.
-      --    Feel free to remove or use ones that you like more! :)
-      --    Don't feel like these are good choices.
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
       controls = {
         icons = {
@@ -73,7 +78,39 @@ return {
           disconnect = '⏏',
         },
       },
+      layouts = {
+        {
+          elements = {
+            {
+              id = 'stacks',
+              size = 0.5,
+            },
+            {
+              id = 'breakpoints',
+              size = 0.25,
+            },
+          },
+          position = 'left',
+          size = 40,
+        },
+        {
+          elements = {
+            {
+              id = 'repl',
+              size = 0.5,
+            },
+            {
+              id = 'scopes',
+              size = 0.5,
+            },
+          },
+          position = 'bottom',
+          size = 20,
+        },
+      },
     }
+
+    dap.set_log_level 'TRACE'
 
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
@@ -81,6 +118,77 @@ return {
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
+
+    -- local pythonAttachConfig = {
+    --   type = 'python',
+    --   request = 'attach',
+    --   connect = {
+    --     port = 5678,
+    --     host = '0.0.0.0',
+    --   },
+    --   mode = 'remote',
+    --   name = 'Container Attach (with choose remote dir)',
+    --   cwd = vim.fn.getcwd(),
+    --   pathMappings = {
+    --     {
+    --       localRoot = vim.fn.getcwd(),
+    --       remoteRoot = function()
+    --         -- NEED to choose correct folder for set breakpoints
+    --         return vim.fn.input('Container code folder > ', '.', 'file')
+    --       end,
+    --     },
+    --   },
+    -- }
+    -- table.insert(require('dap').configurations.python, pythonAttachConfig)
+
+    table.insert(require('dap').configurations.python, {
+      type = 'python',
+      request = 'attach',
+      name = 'Attach remote (with path mapping)',
+      connect = { host = 'localhost', port = 5678 },
+      -- local host = vim.fn.input 'Host [127.0.0.1]: '
+      -- host = host ~= '' and host or '127.0.0.1'
+      -- local port = tonumber(vim.fn.input 'Port [5678]: ') or 5678
+      -- return { host = host, port = port }
+      -- end,
+      pathMappings = {
+        ['/home/developer1/alayadev/accloud-lde/services/api.accounting/'] = '/data',
+      },
+      -- local cwd =
+      -- local remote = '/data'
+      -- return [cwd, remote]
+      -- pathMappings = function()
+      --   local cwd = '/home/developer1/alayadev/accloud-lde/services/api.accounting/'
+      --   local remote = '/data'
+      --   return [cwd, remote]
+      -- local local_path = vim.fn.input('Local path mapping [' .. cwd .. ']: ')
+      -- local_path = local_path ~= '' and local_path or cwd
+      -- local remote_path_mapping = '/data'
+      -- local remote_path = vim.fn.input('Remote path mapping [' .. remote_path_mapping .. ']: ')
+      -- remote_path = remote_path ~= '' and remote_path or remote_path_mapping
+      -- return { { localRoot = local_path, remoteRoot = remote_path } }
+      -- end,
+    })
+
+    -- change Breakpoint icon
+    vim.fn.sign_define('DapBreakpoint', {
+      text = '🅑 ',
+      texthl = '',
+      linehl = '',
+      numhl = '',
+    })
+    -- setup dap autocomplition
+    require('cmp').setup {
+      enabled = function()
+        return vim.api.nvim_buf_get_option(0, 'buftype') ~= 'prompt' or require('cmp_dap').is_dap_buffer()
+      end,
+    }
+
+    require('cmp').setup.filetype({ 'dap-repl', 'dapui_watches', 'dapui_hover' }, {
+      sources = {
+        { name = 'dap' },
+      },
+    })
 
     -- Install golang specific config
     require('dap-go').setup()
