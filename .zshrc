@@ -22,7 +22,7 @@ alias gch='git checkout -b'
 alias wip="git add . && git commit -m 'WIP' -n"
 alias unwip="git reset HEAD^"
 
-alias nvimconf='cd ~/.config/nvim/ && nvim .'
+alias cvim='cd ~/.config/nvim/ && nvim .'
 
 alias tn='tmuxifier new-session'
 alias tl='tmuxifier load-session'
@@ -64,7 +64,7 @@ function gbranch {
 
 alias nvchad="NVIM_APPNAME=nvchad nvim"
 alias lazy="NVIM_APPNAME=lazy nvim"
-alias cvim="NVIM_APPNAME=cvim nvim"
+# alias cvim="NVIM_APPNAME=cvim nvim"
 
 function nvims() {
   items=("default" "NvChad")

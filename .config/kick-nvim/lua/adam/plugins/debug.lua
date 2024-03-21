@@ -14,6 +14,12 @@ return {
   },
   config = function()
     local dap = require 'dap'
+    dap.adapters.python = {
+      type = 'executable',
+      command = 'python3',
+      args = { '-m', 'debugpy.adapter' },
+    }
+
     local dapui = require 'dapui'
 
     local path = '~/.local/share/nvim/mason/packages/debugpy/venv/bin/python'
@@ -24,6 +30,7 @@ return {
       handlers = {},
       ensure_installed = {
         'delve',
+        'debugpy',
       },
     }
 
@@ -145,29 +152,11 @@ return {
       type = 'python',
       request = 'attach',
       name = 'Attach remote (with path mapping)',
+      mode = 'remote',
       connect = { host = 'localhost', port = 5678 },
-      -- local host = vim.fn.input 'Host [127.0.0.1]: '
-      -- host = host ~= '' and host or '127.0.0.1'
-      -- local port = tonumber(vim.fn.input 'Port [5678]: ') or 5678
-      -- return { host = host, port = port }
-      -- end,
       pathMappings = {
         ['/home/developer1/alayadev/accloud-lde/services/api.accounting/'] = '/data',
       },
-      -- local cwd =
-      -- local remote = '/data'
-      -- return [cwd, remote]
-      -- pathMappings = function()
-      --   local cwd = '/home/developer1/alayadev/accloud-lde/services/api.accounting/'
-      --   local remote = '/data'
-      --   return [cwd, remote]
-      -- local local_path = vim.fn.input('Local path mapping [' .. cwd .. ']: ')
-      -- local_path = local_path ~= '' and local_path or cwd
-      -- local remote_path_mapping = '/data'
-      -- local remote_path = vim.fn.input('Remote path mapping [' .. remote_path_mapping .. ']: ')
-      -- remote_path = remote_path ~= '' and remote_path or remote_path_mapping
-      -- return { { localRoot = local_path, remoteRoot = remote_path } }
-      -- end,
     })
 
     -- change Breakpoint icon
