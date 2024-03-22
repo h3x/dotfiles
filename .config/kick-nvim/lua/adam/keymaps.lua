@@ -51,3 +51,6 @@ vim.keymap.set('n', '<leader>h', "'H", { desc = 'Go to mark H', remap = true })
 vim.keymap.set('n', '<leader>j', "'J", { desc = 'Go to mark J', remap = true })
 vim.keymap.set('n', '<leader>k', "'K", { desc = 'Go to mark K', remap = true })
 vim.keymap.set('n', '<leader>l', "'L", { desc = 'Go to mark L', remap = true })
+
+-- Telescope marks
+vim.keymap.set('n', '<leader>mm', ':Telescope marks<CR>', { desc = 'List marks', remap = true })
