@@ -54,3 +54,6 @@ vim.keymap.set('n', '<leader>l', "'L", { desc = 'Go to mark L', remap = true })
 
 -- Telescope marks
 vim.keymap.set('n', '<leader>mm', ':Telescope marks<CR>', { desc = 'List marks', remap = true })
+
+-- Lazydocker
+vim.keymap.set('n', '<leader>ld', '<cmd>LazyDocker<CR>', { desc = 'Toggle LazyDocker', noremap = true, silent = true })

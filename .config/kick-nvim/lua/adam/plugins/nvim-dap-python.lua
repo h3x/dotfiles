@@ -1,9 +1,42 @@
 return {}
--- return {
---   'rcarriga/nvim-dap-ui',
+-- return { -- dap debugging {{{
+--   'mfussenegger/nvim-dap',
+--   lazy = true,
 --   dependencies = {
---     'mfussenegger/nvim-dap',
+--     'nvim-telescope/telescope-dap.nvim',
 --     'mfussenegger/nvim-dap-python',
+--     'nvim-dap-virtual-text',
+--     'nvim-dap-ui',
+--   },
+--   config = function()
+--     local dap = require 'dap'
+--     vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
+--     vim.fn.sign_define('DapStopped', { text = '🚏', texthl = '', linehl = '', numhl = '' })
+--     dap.defaults.fallback.terminal_win_cmd = 'tabnew'
+--     dap.defaults.fallback.focus_terminal = true
+--
+--     local dap_python = require 'dap-python'
+--     dap_python.setup '/usr/bin/python'
+--     dap_python.test_runner = 'pytest'
+--     dap_python.default_port = 38000
+--
+--     dap.listeners.after.event_initialized['dapui_config'] = function()
+--       require('dapui').open()
+--     end
+--     dap.listeners.before.event_terminated['dapui_config'] = function()
+--       require('dapui').close()
+--     end
+--     dap.listeners.before.event_exited['dapui_config'] = function()
+--       require('dapui').close()
+--     end
+--   end,
+-- }
+
+-- return {
+--   'mfussenegger/nvim-dap-python',
+--   dependencies = {
+--     'rcarriga/nvim-dap-ui',
+--     'mfussenegger/nvim-dap',
 --     'theHamsta/nvim-dap-virtual-text',
 --     'rcarriga/cmp-dap',
 --   },

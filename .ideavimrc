@@ -15,8 +15,9 @@ imap kj <Esc>
 set timeoutlen=400
 
 " Set idea to use system clipboard and vice vica
-set clipboard*=unnamed
-set clipboard*=ideaput
+" set clipboard*=unnamed
+" set clipboard*=ideaput
+set clipboard+=unnamedplus
 
 " Set vimrc reloads
 nnoremap \e :e ~/.ideavimrc<CR>

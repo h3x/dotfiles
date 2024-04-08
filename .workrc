@@ -31,6 +31,9 @@ alias v='nvim'
 alias confd='echo DOCKER_XDEBUG_HOST $DOCKER_XDEBUG_HOST && echo DOCKER_XDEBUG_PORT $DOCKER_XDEBUG_PORT && echo DOCKER_REGISTRY  $DOCKER_REGISTRY'
 alias dcmin=' dc up -d nabu apischeduler_worker db maildev apiconfig apiclinical apipatients_worker nginx apibackgroundjobs apiemployees redis apiemployees_worker pg apiauth redis-maps apimaps apipatients app_worker app apiusers apiauth2 apimaps_worker apimaps apischeduler apiaccounting_worker apiaccounting apifiles apisupplies'
 
+alias builddebug='docker build -t api.accounting:debug --build-arg CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN --secret id=CODEARTIFACT_AUTH_TOKEN,env=CODEARTIFACT_AUTH_TOKEN $ALAYACARE_HOME/services/api.accounting/.'
+alias resetdocker='sudo systemctl restart docker'
+alias resetnet='sudo sysctl -w net.ipv4.ip_forward=1'
 
 function phpsucks() {
   pa

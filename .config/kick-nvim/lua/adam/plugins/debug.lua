@@ -5,7 +5,7 @@ return {
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
     'theHamsta/nvim-dap-virtual-text',
-    'mfussenegger/nvim-dap-python',
+    -- 'mfussenegger/nvim-dap-python',
     'rcarriga/cmp-dap',
 
     -- Add your own debuggers here
@@ -14,16 +14,11 @@ return {
   },
   config = function()
     local dap = require 'dap'
-    dap.adapters.python = {
-      type = 'executable',
-      command = 'python3',
-      args = { '-m', 'debugpy.adapter' },
-    }
 
     local dapui = require 'dapui'
 
-    local path = '~/.local/share/nvim/mason/packages/debugpy/venv/bin/python'
-    require('dap-python').setup(path)
+    -- local path = '~/.local/share/nvim/mason/packages/debugpy/venv/bin/python'
+    -- require('dap-python').setup(path)
 
     require('mason-nvim-dap').setup {
       automatic_setup = true,
@@ -157,7 +152,49 @@ return {
       pathMappings = {
         ['/home/developer1/alayadev/accloud-lde/services/api.accounting/'] = '/data',
       },
+      pythonPath = function()
+        local cwd = vim.fn.getcwd()
+        if vim.fn.executable './venv/bin/python' == 1 then
+          return './venv/bin/python'
+        elseif vim.fn.executable 'python3' == 1 then
+          return 'python3'
+        else
+          print "Couldn't find executable python3 or ./venv/bin/python"
+          return nil
+        end
+      end,
     })
+
+    -- dap.adapters.python = function(cb, config)
+    --     if config.request == 'attach' then
+    --       local port = (config.connect or config).port
+    --       cb({
+    --         type = 'server';
+    --         port = assert(port, '`connect.port` is required for a python `attach` configuration');
+    --         host = (config.connect or config).host or '127.0.0.1';
+    --         enrich_config = enrich_config;
+    --         options = {
+    --           source_filetype = 'python',
+    --         }
+    --       })
+    --     else
+    --       cb({
+    --         type = 'executable';
+    --         command = adapter_python_path;
+    --         args = { '-m', 'debugpy.adapter' };
+    --         enrich_config = enrich_config;
+    --         options = {
+    --           source_filetype = 'python',
+    --         }
+    --       })
+    --     end
+    --   end
+
+    -- table.insert(require('dap').adapters.python, {
+    --   type = 'server',
+    --   command = 'python3',
+    --   args = { '-m', 'debugpy.adapter' },
+    -- })
 
     -- change Breakpoint icon
     vim.fn.sign_define('DapBreakpoint', {

@@ -26,6 +26,7 @@ alias cvim='cd ~/.config/nvim/ && nvim .'
 
 alias tn='tmuxifier new-session'
 alias tl='tmuxifier load-session'
+alias lg='lazygit'
 
 function fetchd() {
   git stash
