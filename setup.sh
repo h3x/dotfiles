@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Install packages
+case "$(uname)" in
+    Linux) sudo apt install $(cat packages.txt) ;;
+    Darwin) brew install $(cat packages.txt) ;;
+esac
+
 # setup.sh
 # Symlink dotfiles to the correct locations
 # Commented out files have been omitted as to not mess with current configs. uncomment to include them in them
