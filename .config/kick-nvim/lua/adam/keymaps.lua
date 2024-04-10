@@ -7,7 +7,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Netrw
-vim.keymap.set('n', '<leader>re', ':E<CR>', { desc = 'Open NetRW' })
+vim.keymap.set('n', '<leader>re', ':Oil --float<CR>', { desc = 'Open NetRW' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
@@ -39,6 +39,7 @@ vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]], { desc = '', remap = true })
 
 -- Search and replace
 vim.keymap.set('n', '<leader>s', [[:/<C-r><C-w>]], { desc = '', remap = true })
+vim.keymap.set('v', '<leader>s', 'y/<C-R>"<CR>N', { desc = '', remap = true })
 vim.keymap.set('n', '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '', remap = true })
 
 -- Marks

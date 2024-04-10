@@ -44,7 +44,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fa', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
-    vim.keymap.set('n', '<leader>s', function()
+    vim.keymap.set('n', '<leader>S', function()
       builtin.grep_string {
         previewer = true,
       }

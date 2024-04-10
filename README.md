@@ -19,6 +19,29 @@ pavucontrol
 keeper
 ranger
 
+## Future Ideas
+Write a nvim plugin to associate files with their tests. eg:
+  cmd/
+    blah/
+      mything.go
+  tests/
+    test_mything.go
+    test_mything2.go
+
+we could associate mything, and the test_mything files regardless of file structure
+or nameing (would require manually associating these). So you could be in mything.go
+and just hit <leader>mt or whatever, and your given a list with test_mything and
+test_mything2, as these 2 files have been associated with our code file. Likewise, if
+we are in test_mything file, and hit the <leader>mt, we can jump straight to mything.go
+as this test file is for that code
+
+apparently we should persist these associations in either
+    ~/.local/state/nvim 
+    ~/.cache/nvim
+
+have to look into it more. might be fun. 
+    
+
 ## License
 Unless otherwise marked, everything in this repo is licenced under the WTFPL license terms
 ```       DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
