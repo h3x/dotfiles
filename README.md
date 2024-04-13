@@ -40,7 +40,16 @@ apparently we should persist these associations in either
     ~/.cache/nvim
 
 have to look into it more. might be fun. 
-    
+
+---
+
+Make the dbeaver-connect script but for datagrip
+
+---
+
+Tenant remote database automatic connect thingy
+
+---
 
 ## License
 Unless otherwise marked, everything in this repo is licenced under the WTFPL license terms

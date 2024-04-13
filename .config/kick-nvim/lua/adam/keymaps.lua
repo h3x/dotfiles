@@ -12,6 +12,10 @@ vim.keymap.set('n', '<leader>re', ':Oil --float<CR>', { desc = 'Open NetRW' })
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+-- Hold highlight after tabbing in and out
+vim.keymap.set('v', '>', '>gv', { desc = 'Hold highlight after tabbing in' })
+vim.keymap.set('v', '<', '<gv', { desc = 'Hold highlight after tabbing out' })
+
 -- Keybinds to make split navigation easier.
 -- Use CTRL+<hjkl> to switch between windows
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
