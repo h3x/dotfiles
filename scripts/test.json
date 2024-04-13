@@ -1,5 +1,5 @@
 {
-    "storage_dsn": "access_key_id:",
+    "storage_dsn": "access_key_id",
     "uuid": "213213123123123",
     "name": "TheTenant",
     "region": "aus1",
