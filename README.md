@@ -43,11 +43,27 @@ have to look into it more. might be fun.
 
 ---
 
-Make the dbeaver-connect script but for datagrip
+Nvim plugin to attach labels to blocks of code and ability to search by label.
+so if i have some code somewhere like
+const sum = (a) => a.reduce((x,a) => x + a)
+or whatever, i can label this as sum-arr, then i can search for sum-arr in telescope and this is an option. 
+
+could be useful for labeling exports, or common things we import or use in other files or just navigating to
+often visited places in the codebase
 
 ---
 
-Tenant remote database automatic connect thingy
+Golang/bubbletea viewer for background jobs on tenant environment
+
+---
+
+Golang/bubbletea opensearch intergration
+  - https://github.com/opensearch-project/opensearch-go
+
+### Done
+
+- [x] Make the dbeaver-connect script but for datagrip
+- [x] Tenant remote database automatic connect thingy
 
 ---
 

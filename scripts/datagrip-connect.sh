@@ -1,12 +1,29 @@
 #!/bin/bash
 
+
+GREEN="\033[0;32m"
+BLUE="\033[0;34m"
+RED="\033[0;31m"
+MAGENTA="\033[0;35m"
+NC="\033[0m"
+
 input=$(cat)
+
+[[ -z $input ]] && echo -e "${RED}No input from nabu${NC}" && exit 1
+
+set +e
+errors=$(jq -re '""' <<<"${input}" 2>&1)
+if [ ! -z "${errors}" ]; then
+  echo -e "${RED}Error parsing input: ${errors}${NC}"
+  exit 1
+fi
+
 # Parse JSON and assign to variables
-username=$(echo "${input}" | jq -r '.databases.mysql.username')
-password=$(echo "${input}" | jq -r '.databases.mysql.password')
-hostname=$(echo "${input}" | jq -r '.databases.mysql.hostname')
-port=$(echo "${input}" | jq -r '.databases.mysql.port')
-name=$(echo "${input}" | jq -r '.databases.mysql.name')
+username=$(echo "${input}" | jq -r '.mysql.username')
+password=$(echo "${input}" | jq -r '.mysql.password')
+hostname=$(echo "${input}" | jq -r '.mysql.hostname')
+port=$(echo "${input}" | jq -r '.mysql.port')
+name=$(echo "${input}" | jq -r '.mysql.name')
 
 
 UUID=$(uuidgen -r)
@@ -27,7 +44,6 @@ source="
         <jdbc-url>jdbc:mysql://${hostname}:${port}</jdbc-url>
         <secret-storage>master_key</secret-storage>
         <user-name>${username}</user-name>
-        <password>${password}</password>
         <schema-mapping>
         <introspection-scope>
         <node kind='schema'>
@@ -36,9 +52,13 @@ source="
         </node>
         </introspection-scope>
         </schema-mapping>
-        <working-dir>$ProjectFileDir$</working-dir>
 </data-source>
 #END#"
 
 
-echo "${source}"
+echo "${source}" | xclip -selection clipboard
+
+echo -e "${GREEN}Data source copied to clipboard${NC}"
+echo -e "${MAGENTA}To import the data source in DataGrip, paste the clipboard content in the XML tab of the Data Source Properties dialog${NC}"
+echo -e "Password: ${BLUE}${password}${NC}"
+

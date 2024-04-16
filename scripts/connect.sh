@@ -1,9 +1,6 @@
 #!/bin/bash
 
-# if [ $# -ne 2 ]; then
-#         echo "Usage: connect.sh <tenant> <environment>"
-#         exit 1
-# fi
+# connect.sh
 
 GREEN="\033[0;32m"
 BLUE="\033[0;34m"
@@ -20,7 +17,7 @@ TEMP="${NABU}/${TEMP_FILE}"
 
 input=$(cat)
 
-[[ -z $input ]] && echo "${RED}No input from nabu${NC}" && exit 1
+[[ -z $input ]] && echo -e "${RED}No input from nabu${NC}" && exit 1
 
 set +e
 errors=$(jq -re '""' <<<"${input}" 2>&1)

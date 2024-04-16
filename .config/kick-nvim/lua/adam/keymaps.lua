@@ -57,8 +57,14 @@ vim.keymap.set('n', '<leader>j', "'J", { desc = 'Go to mark J', remap = true })
 vim.keymap.set('n', '<leader>k', "'K", { desc = 'Go to mark K', remap = true })
 vim.keymap.set('n', '<leader>l', "'L", { desc = 'Go to mark L', remap = true })
 
+-- tmux
+vim.keymap.set('n', '<C-f>', '<cmd>!tmux neww tmux-sessioniser<CR>', { desc = 'Open tmux sessionizer' })
+
 -- Telescope marks
 vim.keymap.set('n', '<leader>mm', ':Telescope marks<CR>', { desc = 'List marks', remap = true })
 
 -- Lazydocker
 vim.keymap.set('n', '<leader>ld', '<cmd>LazyDocker<CR>', { desc = 'Toggle LazyDocker', noremap = true, silent = true })
+
+-- Neotest
+vim.keymap.set('n', '<leader>tt', ':Neotest run<CR>', { desc = 'Run tests', noremap = true, silent = true })
