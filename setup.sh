@@ -26,3 +26,7 @@ for dot in "${DOTFILES[@]}"; do
     # rm -rf "${HOME}/$dot"
     ln -sf "${DIR}/${dot}" "${HOME}/${dot}"
 done
+
+# if ~/.fzf-git doesnt exist, clone it
+[ ! -d ~/.fzf-git ] && 
+git clone https://github.com/junegunn/fzf-git.sh.git ~/.fzf-git

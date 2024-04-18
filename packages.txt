@@ -1,2 +1,2 @@
-fd tldr jq tree fzf
+fd tldr jq tree fzf bat git-delta
 
