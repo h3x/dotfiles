@@ -20,7 +20,8 @@ keeper
 ranger
 
 ## Future Ideas
-Write a nvim plugin to associate files with their tests. eg:
+- [ ] Write a nvim plugin to associate files with their tests.
+eg:
   cmd/
     blah/
       mything.go
