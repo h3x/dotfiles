@@ -44,6 +44,16 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fa', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
+    vim.keymap.set('v', '<leader>fg', 'zy:Telescope live_grep default_text="<C-r>z<CR>"', { desc = '[S]earch by [G]rep' })
+    -- default_text = table.concat(get_selection())
+    --
+    -- TODO: Adam make this work. maybe upgrade to nvim nightly
+    -- local get_selection = function()
+    --   return vim.fn.getregion(vim.fn.getpos '.', vim.fn.getpos 'v', { mode = vim.fn.mode() })
+    -- end
+    --
+    -- vim.keymap.set('v', '<leader>fg', builtin.live_grep { default_text = table.concat(get_selection()) }, { desc = '[S]earch by [G]rep' })
+
     vim.keymap.set('n', '<leader>S', function()
       builtin.grep_string {
         previewer = true,

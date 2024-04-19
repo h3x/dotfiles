@@ -10,7 +10,7 @@ alias pa='cd ~/alayadev/accloud-lde/services/phpapp'
 alias da='cd ~/alayadev/accloud-lde/services/db-migrations'
 alias ap='cd ~/alayadev/accloud-lde/services/api.printing'
 alias sa='cd ~/alayadev/accloud-lde/services/api.scheduler'
-alias todo='cd ~/Junk/Docs && glow'
+# alias todo='cd ~/Junk/Docs && glow'
 alias dev='cd ~/dev'
 
 # alias pullall='git-submodules "git checkout develop && git pull && git submodule update"'

@@ -1,4 +1,4 @@
-# Path to your oh-my-zsh installation.
+# Path to your oh-my-zsh installation.z
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 
@@ -7,6 +7,7 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting web-search)
 source $ZSH/oh-my-zsh.sh
 
 export PATH="/opt/:$PATH"
+export PATH="$HOME/dotfiles/scripts/standalone/:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$HOME/.tmuxifier/bin:$PATH"
@@ -27,6 +28,9 @@ alias cvim='cd ~/.config/nvim/ && nvim .'
 alias tn='tmuxifier new-session'
 alias tl='tmuxifier load-session'
 alias lg='lazygit'
+alias sb='cd ~/sb'
+
+alias cat='bat'
 
 function fetchd() {
   git stash
@@ -89,6 +93,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # bindkey -s ^a "nvims\n"
 export EDITOR='/usr/bin/nvim'
+export SECOND_BRAIN='/home/developer1/sb'
 
 nvm use 18.15.0
 
@@ -97,6 +102,7 @@ eval "$(tmuxifier init -)"
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 eval "$(starship init zsh)"
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # Set up fzf keybinds and fuzzy find
 eval "$(fzf --zsh)"
 
@@ -117,3 +123,4 @@ _fzf_compgen_dir() {
 }
 
 source ~/.fzf-git.sh/fzf-git.sh
+
