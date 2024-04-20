@@ -2,12 +2,25 @@ return { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
   dependencies = {
     -- Automatically install LSPs and related tools to stdpath for neovim
-    'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
+    'williamboman/mason.nvim',
 
     { 'j-hui/fidget.nvim', opts = {} },
     { 'folke/neodev.nvim', opts = {} },
+  },
+  setup = {
+    pyright = function(_, opts)
+      local lsp_utils = require 'plugins.lsp.utils'
+      lsp_utils.on_attach(function(client, buffer)
+	            -- stylua: ignore
+	            if client.name == "pyright" then
+	              vim.keymap.set("n", "<leader>tC", function() require("dap-python").test_class() end, { buffer = buffer, desc = "Debug Class" })
+	              vim.keymap.set("n", "<leader>tM", function() require("dap-python").test_method() end, { buffer = buffer, desc = "Debug Method" })
+	              vim.keymap.set("v", "<leader>tS", function() require("dap-python").debug_selection() end, { buffer = buffer, desc = "Debug Selection" })
+	            end
+      end)
+    end,
   },
   config = function()
     vim.api.nvim_create_autocmd('LspAttach', {
@@ -50,8 +63,19 @@ return { -- LSP Configuration & Plugins
     local servers = {
       -- clangd = {},
       gopls = {},
-      pyright = {},
       tsserver = {},
+      pyright = {
+        settings = {
+          python = {
+            analysis = {
+              typeCheckingMode = 'off',
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticMode = 'workspace',
+            },
+          },
+        },
+      },
 
       lua_ls = {
         settings = {
@@ -69,6 +93,7 @@ return { -- LSP Configuration & Plugins
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       'stylua', -- Used to format lua code
+      'debugpy',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

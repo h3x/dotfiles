@@ -6,7 +6,7 @@ return {}
 --     'williamboman/mason.nvim',
 --     'jay-babu/mason-nvim-dap.nvim',
 --     'theHamsta/nvim-dap-virtual-text',
---     -- 'mfussenegger/nvim-dap-python',
+--     'mfussenegger/nvim-dap-python',
 --     'rcarriga/cmp-dap',
 --
 --     -- Add your own debuggers here
@@ -18,8 +18,8 @@ return {}
 --
 --     local dapui = require 'dapui'
 --
---     -- local path = '~/.local/share/nvim/mason/packages/debugpy/venv/bin/python'
---     -- require('dap-python').setup(path)
+--     local path = '~/.local/share/nvim/mason/packages/debugpy/venv/bin/python'
+--     require('dap-python').setup(path)
 --
 --     require('mason-nvim-dap').setup {
 --       automatic_setup = true,
