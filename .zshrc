@@ -17,6 +17,7 @@ export PATH="$HOME/Applications:$PATH"
 alias zsource="source ~/.zshrc"
 alias gpush='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 alias dots='cd ~/dotfiles'
+alias dev='cd ~/dev'
 
 alias pullall='for i in */.git; do ( echo $i; cd $i/..; git checkout develop && git pull; ); done'
 alias gch='git checkout -b'
@@ -93,7 +94,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # bindkey -s ^a "nvims\n"
 export EDITOR='/usr/bin/nvim'
-export SECOND_BRAIN='/home/developer1/sb'
+
+export SECOND_BRAIN="$HOME/sb"
 
 nvm use 18.15.0
 
