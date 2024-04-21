@@ -23,7 +23,6 @@ alias confd='echo DOCKER_XDEBUG_HOST $DOCKER_XDEBUG_HOST && echo DOCKER_XDEBUG_P
 alias develop='git checkout develop'
 
 # pretty prints
-alias dcp='~/dotfiles/scripts/docker-pretty-print.sh'
 alias localdb="cat $ALAYACARE_HOME/services/nabu/web/api/v1/tenant/alayadev.json | jq -e '.databases | {mysql: .mysql, jobs: .jobs}'"
 alias dbgrep="jq -e '.databases | {mysql: .mysql, jobs: .jobs}'"
 

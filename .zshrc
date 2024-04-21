@@ -18,6 +18,8 @@ alias zsource="source ~/.zshrc"
 alias gpush='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
 alias dots='cd ~/dotfiles'
 alias dev='cd ~/dev'
+alias dcp='~/dotfiles/scripts/docker-pretty-print.sh'
+alias dc='docker compose'
 
 alias pullall='for i in */.git; do ( echo $i; cd $i/..; git checkout develop && git pull; ); done'
 alias gch='git checkout -b'
