@@ -73,8 +73,7 @@ local M = {
     local dap, dapui = require 'dap', require 'dapui'
     dapui.setup {}
 
-    -- vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
-    vim.fn.sign_define('DapBreakpoint', { text = '\\ue602', texthl = '', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
 
     vim.fn.sign_define('DapStopped', { text = '🟢', texthl = '', linehl = '', numhl = '' })
     -- vim.fn.sign_define('DapBreakpointCondition', { text = '⛔', texthl = '', linehl = '', numhl = '' })
