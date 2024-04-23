@@ -32,14 +32,59 @@ return { -- Fuzzy Finder (files, lsp, etc)
     pcall(require('telescope').load_extension, 'harpoon')
     pcall(require('telescope').load_extension, 'rest')
 
+    -- Define a custom filter function to ignore test files
+    local function filter_out_test_files(results)
+      local filtered_results = {}
+      for _, result in ipairs(results) do
+        -- You can modify this condition based on your test file naming conventions
+        if not string.match(result.display, 'test') then
+          table.insert(filtered_results, result)
+        end
+      end
+      return filtered_results
+    end
+
+    -- Function to call Telescope with custom filter
+    local function search_files(should_include_tests)
+      require('telescope.builtin').find_files {
+        -- Pass the custom filter function to Telescope
+        attach_mappings = function(_, map)
+          map('i', '<cr>', function(prompt_bufnr)
+            local selection = require('telescope.actions.state').get_selected_entry()
+            require('telescope.actions').close(prompt_bufnr)
+            vim.cmd(string.format('e %s', selection.path))
+          end)
+          return true
+        end,
+        -- Apply custom filter based on the condition
+        filter = should_include_tests and nil or filter_out_test_files,
+      }
+    end
+
+    -- Define a custom function that calls find_files with custom filtering
+    local function custom_find_files()
+      require('telescope.builtin').find_files {
+        attach_mappings = function(_, map)
+          map('i', '<cr>', function(prompt_bufnr)
+            local selection = require('telescope.actions.state').get_selected_entry()
+            require('telescope.actions').close(prompt_bufnr)
+            vim.cmd(string.format('e %s', selection.path))
+          end)
+          return true
+        end,
+        filter = should_include_tests and nil or filter_out_test_files,
+      }
+    end
+
+    -- Define the keymap with the custom function
+    vim.keymap.set('n', '<leader>ft', custom_find_files, { desc = '[S]earch [F]iles' })
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
     vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[S]earch [F]iles' })
     vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { file_ignore_patterns = { 'tests/.*' }, desc = '[S]earch by [G]rep' })
-    vim.keymap.set('n', '<leader>ft', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
     vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>fa', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
