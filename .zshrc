@@ -32,8 +32,10 @@ alias tn='tmuxifier new-session'
 alias tl='tmuxifier load-session'
 alias lg='lazygit'
 alias sb='cd ~/sb'
+alias work='ssh developer1@192.168.20.10'
 
 alias cat='bat'
+alias love="/opt/love.app/Contents/MacOS/love"
 
 function fetchd() {
   git stash
