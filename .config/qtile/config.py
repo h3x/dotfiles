@@ -2,16 +2,17 @@ import os
 import re
 import socket
 import subprocess
-
-from libqtile import bar, layout, widget, hook
-from libqtile.config import Click, Drag, Group, ScratchPad, DropDown, Key, Match, Screen
-from libqtile.lazy import lazy
 from typing import List
+
+from libqtile import bar, hook, layout, widget
+from libqtile.config import (Click, Drag, DropDown, Group, Key, Match,
+                             ScratchPad, Screen)
+from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
-from themes.tokyonight import colors_init
 # from themes.rosepine import colors_init
 from spotify import Spotify
 from spotify_controls import SpotifyControls
+from themes.tokyonight import colors_init
 
 colors = colors_init()
 
@@ -115,7 +116,7 @@ groups.append(ScratchPad("scratchpad", [
     DropDown("volume", "pavucontrol", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
     DropDown("keeper", "keeperpasswordmanager", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
     DropDown("nemo", "nemo", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
-    DropDown("zoom", "zoom", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
+    # DropDown("zoom", "zoom", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
     # DropDown("term2", "alacritty --class=scratch", width=0.8, height=0.8, x=0.1, y=0.1, opacity=1),
     # DropDown("news", "alacritty --class=news -e newsboat", width=0.8, height=0.8, x=0.1, y=0.1, opacity=0.9),
 
@@ -128,7 +129,7 @@ keys.extend([
     Key([mod], "p", lazy.group['scratchpad'].dropdown_toggle('keeper')),
     Key([mod], "m", lazy.group['scratchpad'].dropdown_toggle('nemo')),
     Key([mod], "c", lazy.group['scratchpad'].dropdown_toggle('slack')),
-    Key([mod], "z", lazy.group['scratchpad'].dropdown_toggle('zoom')),
+    # Key([mod], "z", lazy.group['scratchpad'].dropdown_toggle('zoom')),
     # Key([mod], "b", lazy.group['scratchpad'].dropdown_toggle('news')),
     # Key([mod, "shift"], "n", lazy.group['scratchpad'].dropdown_toggle('term2')),
 ])

@@ -6,3 +6,4 @@ dunst &
 nm-applet &
 blueman-applet &
 NetworkManager &
+QT_AUTO_SCREEN_SCALE_FACTOR=1 zoom&
