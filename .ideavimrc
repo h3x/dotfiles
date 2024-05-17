@@ -18,6 +18,8 @@ set timeoutlen=400
 " set clipboard*=unnamed
 " set clipboard*=ideaput
 set clipboard+=unnamedplus
+set NERDTree
+nnoremap <leader>re :NERDTreeToggle<CR>
 
 " Set vimrc reloads
 nnoremap \e :e ~/.ideavimrc<CR>
@@ -50,7 +52,8 @@ nnoremap <leader>u :action FindUsages<CR>
 " nnoremap <leader>s viwy:/<c-r>+
 nnoremap <leader>s viw"ky:/<c-r>k
 
-nnoremap <leader>r viwy:%s/<c-r>+//gI<left><left><left>
+" TODO: Fix This
+" nnoremap <leader>r viwy:%s/<c-r>+//gI<left><left><left>
 
 vnoremap <leader>s y:/<c-r>+
 vnoremap <leader>r y:%s/<c-r>+//gI<left><left><left>
