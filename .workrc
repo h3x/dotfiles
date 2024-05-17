@@ -32,7 +32,7 @@ alias resetnet='sudo sysctl -w net.ipv4.ip_forward=1'
 alias dpld='dc exec -u www-data app composer dump-autoload'
 alias dcclean="docker system prune -a -f"
 alias builddebug='docker build -t api.accounting:debug --build-arg CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN --secret id=CODEARTIFACT_AUTH_TOKEN,env=CODEARTIFACT_AUTH_TOKEN $ALAYACARE_HOME/services/api.accounting/.'
-
+alias terradome='rm $ALAYACARE_HOME/services/accloud-tf-infrastructure/components/cluster_stacks/modules/stack/terraform.tfstate'
 # Fucking php :(
 function phpsucks() {
   pa
@@ -88,6 +88,7 @@ function vpnaus() {
 }
 
 export NABU_TENANT_FOLDER="$ALAYACARE_HOME/nabu/web/api/v1/tenant"
+export QT_SCALE_FACTOR=0.5
 
 # Source other work files
 
