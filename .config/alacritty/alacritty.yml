@@ -1,7 +1,8 @@
 # Color Scheme
 # Change the import to change the color scheme
 import:
-  - ~/dotfiles/.config/alacritty/themes/tokyo-night.yml
+  # - ~/dotfiles/.config/alacritty/themes/tokyo-night.yml
+  - ~/dotfiles/.config/alacritty/themes/catppuccin-mocha.toml
 
 live_config_reload: true
 
@@ -33,7 +34,7 @@ font:
   bold_italic:
     family: "FiraCode Nerd Font Mono SemBd"
     style: Bold Italic
-  size: 8.0
+  size: 12.0
   # use_thin_strokes: true
 
 draw_bold_text_with_bright_colors: true
