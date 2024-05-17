@@ -1,15 +1,42 @@
 k9s:
-  # liveViewAutoRefresh: false
-  # refreshRate: 2
-  # maxConnRetry: 5
-  # readOnly: false
+  liveViewAutoRefresh: false
+  screenDumpDir: /Users/adam/Library/Application Support/k9s/screen-dumps
+  refreshRate: 2
+  maxConnRetry: 5
+  readOnly: false
+  noExitOnCtrlC: false
   ui:
-    skin: catppuccin-mocha # 
-    # enableMouse: false
-    # headless: false
-    # logoless: false
-    # crumbsless: false
-    # noIcons: false
-    # Toggles reactive UI. This option provide for watching on disk artifacts changes and update the UI live  Defaults to false.
-    # reactive: false
-    # Uses in_the_navy skin located in your $XDG_CONFIG_HOME/skins/in_the_navy.yaml
+    skin: catppuccin-mocha
+    enableMouse: false
+    headless: false
+    logoless: false
+    crumbsless: false
+    reactive: false
+    noIcons: false
+    defaultsToFullScreen: false
+  skipLatestRevCheck: false
+  disablePodCounting: false
+  shellPod:
+    image: busybox:1.35.0
+    namespace: default
+    limits:
+      cpu: 100m
+      memory: 100Mi
+  imageScans:
+    enable: false
+    exclusions:
+      namespaces: []
+      labels: {}
+  logger:
+    tail: 100
+    buffer: 5000
+    sinceSeconds: -1
+    textWrap: false
+    showTime: false
+  thresholds:
+    cpu:
+      critical: 90
+      warn: 70
+    memory:
+      critical: 90
+      warn: 70

@@ -13,6 +13,8 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 export PATH="$HOME/Applications:$PATH"
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # Aliases
 alias zsource="source ~/.zshrc"
 alias gpush='git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)'
