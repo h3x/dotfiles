@@ -17,6 +17,7 @@ DOTFILES=(
   ".config/tmux"
   ".config/qtile"
   ".config/rofi"
+  ".config/k9s"
   # ".zshrc"
   ".ideavimrc"
   # ".config/nvim"
