@@ -1,3 +1,7 @@
+" Plugs
+Plug 'machakann/vim-highlightedyank'
+let g:highlightedyank_highlight_color = "rgba(166, 227, 161, 155)"
+
 " Set Leader Key
 let mapleader = " "
 
@@ -120,8 +124,9 @@ vnoremap J :m '>+1<CR>V
 " Other stuff
 vnoremap < <gv
 vnoremap > >gv
-vnoremap <c-r> :action Redo
-nnoremap <c-r> :action RecentFiles<CR>
+vnoremap <c-r> :action $Redo<CR>
+nnoremap <c-r> :action $Redo<CR>
+" nnoremap <c-r> :action RecentFiles<CR>
 nnoremap <leader>o :action ToggleDistractionFreeMode<CR>
 nnoremap <leader>f :action ReformatCode<CR>
 nnoremap <c-k> :action ShowErrorDescription<CR>
