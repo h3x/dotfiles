@@ -5,11 +5,13 @@ alias cypress="cd ~/alayadev/accloud-lde/alaya-cypress-rcm && npm run ui -- --CY
 alias wa='cd ~/alayadev/accloud-lde/services/webapp'
 alias waa='cd ~/alayadev/accloud-lde/services/webapp/web/js/vue-components'
 alias aa='cd ~/alayadev/accloud-lde/services/api.accounting'
-alias ca='cd ~/alayadev/accloud-lde/services/api.accounting/api.common'
+# alias ca='cd ~/alayadev/accloud-lde/services/api.accounting/api.common'
 alias pa='cd ~/alayadev/accloud-lde/services/phpapp'
+alias ra='cd ~/alayadev/accloud-lde/services/api.rating/'
 alias da='cd ~/alayadev/accloud-lde/services/db-migrations'
 alias ap='cd ~/alayadev/accloud-lde/services/api.printing'
 alias sa='cd ~/alayadev/accloud-lde/services/api.scheduler'
+alias ca='cd ~/alayadev/accloud-lde/alaya-cypress-rcm'
 # alias todo='cd ~/Junk/Docs && glow'
 alias dev='cd ~/dev'
 
@@ -21,6 +23,7 @@ alias confd='echo DOCKER_XDEBUG_HOST $DOCKER_XDEBUG_HOST && echo DOCKER_XDEBUG_P
 
 # Git
 alias develop='git checkout develop'
+alias main='git checkout main'
 
 # pretty prints
 alias localdb="cat $ALAYACARE_HOME/services/nabu/web/api/v1/tenant/alayadev.json | jq -e '.databases | {mysql: .mysql, jobs: .jobs}'"

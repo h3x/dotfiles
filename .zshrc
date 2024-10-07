@@ -23,7 +23,7 @@ alias dev='cd ~/dev'
 alias dcp='~/dotfiles/scripts/docker-pretty-print.sh'
 alias dc='docker compose'
 
-alias pullall='for i in */.git; do ( echo $i; cd $i/..; git checkout develop && git pull; ); done'
+# alias pullall='for i in */.git; do ( echo $i; cd $i/..; git checkout develop && git pull; ); done'
 alias gch='git checkout -b'
 alias wip="git add . && git commit -m 'WIP' -n"
 alias unwip="git reset HEAD^"
@@ -38,6 +38,61 @@ alias work='ssh developer1@192.168.20.10'
 
 alias cat='bat'
 alias love="/opt/love.app/Contents/MacOS/love"
+
+function fixzsh() {
+  cd ~
+  mv .zsh_history .zsh_history_bad
+  strings .zsh_history_bad > .zsh_history
+  fc -R .zsh_history
+  rm .zsh_history_bad
+}
+
+function pullall() {
+  declare -a MAIN=(
+    "api.accounting"
+    "api.rating"
+    "api.auth"
+    "api.background-jobs"
+    "api.clinical"
+    "api.config"
+    "api.employees"
+    "api.files"
+    "api.intake"
+    "api.patients"
+    "api.scheduler"
+    "api.tasks"
+    "api.users"
+    "api.reporting"
+    "nginx"
+  )
+
+  declare -a DEVELOP=(
+    "accloud-intake-service"
+    "accloud-service-holiday-groups"
+    "accloud-tf-infrastructure"
+    "api.auth2"
+    "api.external-integrations"
+    "api.labs"
+    "api.logs"
+    "api.maps"
+    "api.notifications"
+    "api.printing"
+    "api.schedule-optimization"
+    "api.supplies"
+    "db-migrations"
+    "phpapp"
+    "webapp"
+    )
+
+
+  for i in "${MAIN[@]}"; do
+    ( echo "\e[32m$i\e[0m"; cd $i/; git checkout main && git pull; )
+  done 
+
+  for i in "${DEVELOP[@]}"; do
+    ( echo "\e[32m$i\e[0m"; cd $i/; git checkout develop && git pull; )
+  done
+}
 
 function fetchd() {
   git stash
