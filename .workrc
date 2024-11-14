@@ -25,6 +25,9 @@ alias confd='echo DOCKER_XDEBUG_HOST $DOCKER_XDEBUG_HOST && echo DOCKER_XDEBUG_P
 alias develop='git checkout develop'
 alias main='git checkout main'
 
+# Create/Update test db
+alias testdb="da && ./create.sh -d -h db -e mysql -n test_mysql -t mysql -u root -p root -l root -r root -P 3306 -a dev"
+
 # pretty prints
 alias localdb="cat $ALAYACARE_HOME/services/nabu/web/api/v1/tenant/alayadev.json | jq -e '.databases | {mysql: .mysql, jobs: .jobs}'"
 alias dbgrep="jq -e '.databases | {mysql: .mysql, jobs: .jobs}'"
@@ -36,6 +39,7 @@ alias dpld='dc exec -u www-data app composer dump-autoload'
 alias dcclean="docker system prune -a -f"
 alias builddebug='docker build -t api.accounting:debug --build-arg CODEARTIFACT_AUTH_TOKEN=$CODEARTIFACT_AUTH_TOKEN --secret id=CODEARTIFACT_AUTH_TOKEN,env=CODEARTIFACT_AUTH_TOKEN $ALAYACARE_HOME/services/api.accounting/.'
 alias terradome='rm $ALAYACARE_HOME/services/accloud-tf-infrastructure/components/cluster_stacks/modules/stack/terraform.tfstate'
+
 # Fucking php :(
 function phpsucks() {
   pa

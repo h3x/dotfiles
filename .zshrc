@@ -39,6 +39,10 @@ alias work='ssh developer1@192.168.20.10'
 alias cat='bat'
 alias love="/opt/love.app/Contents/MacOS/love"
 
+function f() {
+  find ~ \( -path ~/alayadev -o -path ~/dev -o -path ~/.local -o -path ~/.config -o -path ~/DataGripProjects \) -prune -o -type f -name "$1" 2> /dev/null
+}
+
 function fixzsh() {
   cd ~
   mv .zsh_history .zsh_history_bad
@@ -159,6 +163,7 @@ export EDITOR='/usr/bin/nvim'
 export SECOND_BRAIN="$HOME/sb"
 
 nvm use 18.15.0
+~/dotfiles/scripts/intro
 
 eval "$(tmuxifier init -)"
 
