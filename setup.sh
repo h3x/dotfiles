@@ -18,6 +18,7 @@ DOTFILES=(
   ".config/qtile"
   ".config/rofi"
   ".config/k9s"
+  ".wezterm"
   # ".zshrc"
   ".ideavimrc"
   # ".config/nvim"
