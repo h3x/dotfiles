@@ -68,3 +68,4 @@ vim.keymap.set('n', '<leader>ld', '<cmd>LazyDocker<CR>', { desc = 'Toggle LazyDo
 
 -- Neotest
 vim.keymap.set('n', '<leader>tt', ':Neotest run<CR>', { desc = 'Run tests', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>ts', ':Neotest summary<CR>', { desc = 'Open test Summary', noremap = true, silent = true })

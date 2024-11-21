@@ -27,6 +27,25 @@ config.enable_tab_bar = false
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.92
 config.macos_window_background_blur = 1
+-- make copy paste work
+--config.enable_clipboard = true
+config.mouse_bindings = {
+	{
+		event = { Down = { streak = 1, button = "Right" } },
+		mods = "NONE",
+		action = wezterm.action({ CopyTo = "Clipboard" }),
+	},
+}
+-- open links on click
+-- config.hyperlink_rules = {
+-- Open all links in the default browser
+-- This is the default rule, so we don't need to specify it
+-- { regex = "https?://[^\\s]+", hyperlink = "$0" },
+-- Open all links in the default browser
+-- 	{ regex = "https?://[^\\s]+", hyperlink = "$0" },
+-- 	{ regex = "ssh://[^\\s]+", hyperlink = "$0" },
+-- 	{ regex = "file://[^\\s]+", hyperlink = "$0" },
+-- }
 
 -- and finally, return the configuration to wezterm
 return config
