@@ -24,9 +24,14 @@ return {
           root_dir = function()
             return '/data' -- Inside the container
           end,
-          command = function()
-            -- return 'docker compose exec apiaccounting pytest'
-            return "docker compose exec apiaccounting /bin/bash -c 'source /data/venv/bin/activate && pytest $@'"
+          runner = function()
+            return 'docker compose exec apiaccounting /usr/local/bin/python -m /usr/local/bin/pytest'
+          end,
+          command = function(file)
+            
+            -- return "sh -c 'docker compose exec apiaccounting pytest $@'"
+            -- return "docker compose exec apiaccounting /bin/bash -c 'pytest $@'"
+            return "docker compose exec apiaccounting /usr/local/bin/python -m /usr/local/bin/pytest -v " .. file
           end,
           args = function(file)
             -- Map local file paths to container paths

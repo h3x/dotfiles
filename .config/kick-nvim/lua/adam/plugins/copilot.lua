@@ -1,6 +1,6 @@
 return {
   'CopilotC-Nvim/CopilotChat.nvim',
-  branch = 'canary',
+  branch = 'main',
   dependencies = {
     {
       'zbirenbaum/copilot.lua',
@@ -30,6 +30,6 @@ return {
     { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
   },
   opts = {
-    debug = true, -- Enable debugging
+    debug = false, -- Enable debugging
   },
 }
