@@ -91,6 +91,10 @@ function vpnnon() {
   _vpn_action "nonprod.can1"
 }
 
+function vpnprod() {
+  _vpn_action "prod.can1"
+}
+
 function vpnaus() {
   _vpn_action "ausprod.can1"
 }

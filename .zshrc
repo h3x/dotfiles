@@ -167,7 +167,8 @@ export EDITOR='/usr/bin/nvim'
 
 export SECOND_BRAIN="$HOME/sb"
 
-nvm use 18.15.0
+# nvm use 18.15.0
+nvm use 20.5.0
 ~/dotfiles/scripts/intro
 
 eval "$(tmuxifier init -)"
