@@ -58,3 +58,9 @@ vim.opt.smartindent=true
 
 vim.opt.termguicolors=true
 
+-- see `:h completeopt`
+vim.opt.completeopt="menuone,noselect,popup"
+-- map <c-space> to activate completion
+vim.keymap.set("i", "<c-space>", function() vim.lsp.completion.get() end)
+-- map <cr> to <c-y> when the popup menu is visible
+vim.keymap.set("i", "<cr>", "pumvisible() ? '<c-y>' : '<cr>'", { expr = true })
