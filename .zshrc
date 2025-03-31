@@ -8,10 +8,12 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="/opt/:$PATH"
 export PATH="$HOME/dotfiles/scripts/standalone/:$PATH"
+export PATH="$HOME/dotfiles/scripts/work/:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:/usr/local/go/bin
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 export PATH="$HOME/Applications:$PATH"
+export PATH="$HOME/.emacs.d/bin:$PATH"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
@@ -113,6 +115,9 @@ function b36() {
     echo "base 36: $((10#$1))" 
 }
 
+function dce() {
+  dc exec -t $1 /bin/bash -c "export TERM=vt100;exec bash"
+}
 
 function glog(){
     git log --decorate --simplify-by-decoration --oneline | grep -v "(HEAD" | head -n1 sed 's/.* (\(.*\)) .*/\1' sed 's/\(.*\), .*/\1/' sed 's/origin\///'
@@ -162,7 +167,8 @@ export EDITOR='/usr/bin/nvim'
 
 export SECOND_BRAIN="$HOME/sb"
 
-nvm use 18.15.0
+# nvm use 18.15.0
+nvm use 20.5.0
 ~/dotfiles/scripts/intro
 
 eval "$(tmuxifier init -)"
