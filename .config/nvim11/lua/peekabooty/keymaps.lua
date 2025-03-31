@@ -48,6 +48,9 @@ vim.keymap.set('n', '<leader>mm', ':Telescope marks<CR>', { desc = 'List marks',
 -- Delete without yanking
 vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]], { desc = '', remap = true })
 
+-- Copilot
+vim.keymap.set('n', '<leader>co', ':CopilotChatOpen<CR>', { desc = 'Open [C]opilot chat' })
+vim.keymap.set('n', '<leader>ce', ':CopilotChatExplain<CR>', { desc = 'Open [C]opilot [E]xplain' })
 
 -- [[ Maybe not needed anymore ]] --
 
@@ -58,9 +61,6 @@ vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]], { desc = '', remap = true })
 -- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 -- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 --
--- -- Copilot
--- vim.keymap.set('n', '<leader>co', ':CopilotChatOpen<CR>', { desc = 'Open [C]opilot chat' })
--- vim.keymap.set('n', '<leader>ce', ':CopilotChatExplain<CR>', { desc = 'Open [C]opilot [E]xplain' })
 --
 -- -- Lazygit
 -- vim.keymap.set('n', '<leader>lg', ':LazyGit<CR>', { desc = 'Open [L]azy[G]it' })

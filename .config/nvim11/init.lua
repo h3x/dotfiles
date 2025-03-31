@@ -1,6 +1,6 @@
 require 'peekabooty.options'
 require 'peekabooty.keymaps'
-require 'peekabooty.autocomands'
+--require 'peekabooty.autocomands'
 
 
 -- [[ Install `lazy.nvim` plugin manager ]]

@@ -12,16 +12,6 @@ function ColorMyPencils(color)
 end
 
 return {
-  -- {
-  -- 'folke/tokyonight.nvim',
-  -- priority = 1000, -- make sure to load this before all the other start plugins
-  -- init = function()
-  --   vim.cmd.colorscheme 'tokyonight-night'
-
-  -- You can configure highlights by doing something like
-  --   vim.cmd.hi 'Comment gui=none'
-  -- end,
-  -- },
   {
     'folke/tokyonight.nvim',
     priority = 1000,
@@ -64,19 +54,19 @@ return {
         end,
       }
 
- --     vim.cmd 'colorscheme tokyonight'
+     vim.cmd 'colorscheme tokyonight'
     end,
   },
   {
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
-    -- init = function()
-    --   vim.cmd.colorscheme 'catppuccin-mocha'
-
+    init = function()
+      -- vim.cmd.colorscheme 'catppuccin-mocha'
+    --
     -- You can configure highlights by doing something like
-    --   vim.cmd.hi 'Comment gui=none'
-    -- end,
+      -- vim.cmd.hi 'Comment gui=none'
+    end,
   },
   {
     'olivercederborg/poimandres.nvim',
@@ -97,8 +87,37 @@ return {
     priority = 1000,
     opts = {},
     init = function()
-      ColorMyPencils 'catppuccin-mocha'
-      vim.cmd 'colorscheme eldritch'
+      -- ColorMyPencils 'catppuccin-mocha'
+      -- vim.cmd 'colorscheme eldritch'
+    end,
+    config = function()
+      require("eldritch").setup({
+        transparent=true,
+        styles = {
+          sidebars = transparent and 'transparent' or 'dark',
+          floats = transparent and 'transparent' or 'dark',
+        },
+      })
+    end,
+    on_colors = function(colors)
+      colors.bg_dark = colors.none
+      colors.bg_float = colors.none
+      colors.bg_sidebar = colors.none
+      colors.bg_statusline = colors.none
+    end,
+  },
+  {
+    'scottmckendry/cyberdream.nvim',
+    lazy=false,
+    priority=1000,
+    -- init = function()
+    --   ColorMyPencils 'cyberdream'
+    --   vim.cmd 'colorscheme cyberdream'
+    -- end,
+    config = function()
+      require("cyberdream").setup({
+        transparent=true,
+      })
     end,
   },
 }

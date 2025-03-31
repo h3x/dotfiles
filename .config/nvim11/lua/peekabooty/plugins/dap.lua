@@ -1,0 +1,31 @@
+return {
+    -- {
+    --     "rcarriga/nvim-dap-ui",
+    --     dependencies = {
+    --     "mfussenegger/nvim-dap",
+    --     "theHamsta/nvim-dap-virtual-text",
+    --     "nvim-telescope/telescope-dap.nvim",
+    --     },
+    --     config = function()
+    --     require("peekabooty.plugins.dap.config")
+    --     end,
+    -- },
+    -- {
+    --     "jbyuki/one-small-step-for-vimkind",
+    --     lazy = true,
+    -- },
+    -- {
+    --     "rcarriga/nvim-dap-ui",
+    --     lazy = true,
+    --     config = function()
+    --         require("peekabooty.plugins.dap.config")
+    --     end,
+    -- },
+    -- {
+    --     "folke/neodev.nvim",
+    --     lazy = true,
+    --     config = function()
+    --         require("neodev").setup()
+    --     end,
+    -- },
+}
