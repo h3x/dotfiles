@@ -44,8 +44,12 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[S]earch [R]esume' })
     vim.keymap.set('n', '<leader>fa', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-    -- TODO: Add leader a for document symbol search
-    -- vim.keymap.set("n", "<leader>a", builtin.lsp_document_symbols({symbols={"method","function"}}) , { desc = "[S]earch [A]ll functions" })
+
+    -- Search document symbols
+    vim.keymap.set("n", "<leader>a", function() 
+       require("telescope.builtin").lsp_document_symbols({symbols={"class","method","function"}}) 
+    end, opts)
+
 
     vim.keymap.set('v', '<leader>fg', 'zy:Telescope live_grep default_text="<C-r>z<CR>"', { desc = '[S]earch by [G]rep' })
 

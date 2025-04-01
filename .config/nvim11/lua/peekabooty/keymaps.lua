@@ -52,6 +52,9 @@ vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]], { desc = '', remap = true })
 vim.keymap.set('n', '<leader>co', ':CopilotChatOpen<CR>', { desc = 'Open [C]opilot chat' })
 vim.keymap.set('n', '<leader>ce', ':CopilotChatExplain<CR>', { desc = 'Open [C]opilot [E]xplain' })
 
+-- Navigation
+vim.keymap.set('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { desc = 'Go to definition' })
+--
 -- [[ Maybe not needed anymore ]] --
 
 -- -- Keybinds to make split navigation easier.
