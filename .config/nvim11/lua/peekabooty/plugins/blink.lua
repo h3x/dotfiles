@@ -12,7 +12,7 @@ return {
 	  desc = 'Toggle ; at eol',
 	},
 	{
-	  ',',
+	  '<C-,>',
 	  function()
 	  	require('blink.chartoggle').toggle_char_eol(',')
 	  end,
@@ -21,9 +21,8 @@ return {
 	},
 
 	-- tree
-	{ '<C-e>', '<cmd>BlinkTree reveal<cr>', desc = 'Reveal current file in tree' },
-	{ '<leader>t', '<cmd>BlinkTree toggle<cr>', desc = 'Reveal current file in tree' },
-	{ '<leader>E', '<cmd>BlinkTree toggle-focus<cr>', desc = 'Toggle file tree focus' },
+	{ '<C-e>', '<cmd>BlinkTree toggle<cr>', desc = 'Reveal current file in tree' },
+	{ '<C-t>', '<cmd>BlinkTree toggle-focus<cr>', desc = 'Toggle file tree focus' },
   },
   -- all modules handle lazy loading internally
   lazy = false,
