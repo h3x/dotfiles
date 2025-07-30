@@ -76,7 +76,9 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     # Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod, "control"], "q", lazy.spawn("i3lock -c 1e1f26"), desc="Lock screen"),
+    # Key([mod, "control"], "q", lazy.spawn("i3lock -c 1e1f26"), desc="Lock screen"),
+    
+    Key([mod], "n", lazy.spawn("i3lock -c 1e1f26"), desc="Lock screen"),
     Key(
         [mod, "shift"],
         "p",
@@ -185,7 +187,6 @@ groups.append(
 # Scratchpad keybindings
 keys.extend(
     [
-        Key([mod], "n", lazy.group["scratchpad"].dropdown_toggle("term")),
         Key([mod], "v", lazy.group["scratchpad"].dropdown_toggle("volume")),
         Key([mod], "p", lazy.group["scratchpad"].dropdown_toggle("keeper")),
         Key([mod], "m", lazy.group["scratchpad"].dropdown_toggle("nemo")),

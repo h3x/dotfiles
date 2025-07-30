@@ -11,6 +11,8 @@ input=$(cat)
 
 [[ -z $input ]] && echo -e "${RED}No input from nabu${NC}" && exit 1
 
+# echo $input
+
 set +e
 errors=$(jq -re '""' <<<"${input}" 2>&1)
 if [ ! -z "${errors}" ]; then

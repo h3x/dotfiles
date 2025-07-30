@@ -184,6 +184,7 @@ eval "$(fzf --zsh)"
 export FZF_DEFAULT_COMMAND='fd --hidden --strip-cwd-prefix --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 # export BAT_THEME="Catppuccin Mocha"
 
 # Use fd for listing path candidates
