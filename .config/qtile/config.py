@@ -20,6 +20,14 @@ mod = "mod4"
 terminal = guess_terminal()
 # terminal = "wezterm"
 
+def get_network_interface():
+    try:
+        output = subprocess.check_output(["ip", "link", "show"], text=True)
+        for line in output.splitlines():
+            if "state UP" in line:
+                return line.split(":")[1].strip()
+    except subprocess.CalledProcessError:
+        return None
 
 @hook.subscribe.startup_once
 def autostart_once():
@@ -28,15 +36,12 @@ def autostart_once():
 
 
 keys = [
-    # A list of available commands that can be bound to keys can be found
-    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    # Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
-    # Move windows between left/right columns or move up/down in current stack.
+    
     # Moving out of range in Columns layout will create new column.
     Key(
         [mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"
@@ -60,8 +65,7 @@ keys = [
     Key([mod, "control"], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     Key([mod], "f", lazy.window.toggle_floating(), desc="Toggle Floating"),
     Key([mod], "s", lazy.spawn("flameshot gui", shell=True), desc="Take a screenshot"),
-    # Key([mod], "i", lazy.spawn(os.path.expanduser('~/.config/qtile/scripts/pyswitcher.sh'), shell=True), desc="Rofi script for pycharm"),
-    # Toggle between split and unsplit sides of stack.
+
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
@@ -78,7 +82,7 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     # Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     # Key([mod, "control"], "q", lazy.spawn("i3lock -c 1e1f26"), desc="Lock screen"),
-    
+
     Key([mod], "n", lazy.spawn("i3lock -c 1e1f26"), desc="Lock screen"),
     Key(
         [mod, "shift"],
@@ -310,6 +314,14 @@ def init_widgets_list():
         ),
         widget.WindowName(foreground=colors[6], background=colors[0], padding=0),
         widget.Sep(linewidth=0, padding=40, foreground=colors[2], background=colors[0]),
+        widget.Net(
+            # interface="wlxc83a35b487dd",
+            interface=get_network_interface(),
+            format="{down} ↓↑ {up}",
+            foreground=colors[5],
+            background=colors[0],
+            padding=5,
+        ),
         Spotify(
             format="{artist}: {track}  {icon}",
             play_icon="",
@@ -337,31 +349,24 @@ def init_widgets_list():
             fontsize=16,
         ),
         widget.ThermalSensor(foreground=colors[2], background=colors[0], padding=5),
+        # widget.TextBox(
+        #     text=" ⟳",
+        #     padding=2,
+        #     foreground=colors[4],
+        #     background=colors[0],
+        #     fontsize=19,
+        # ),
+        # widget.TextBox(
+        #     text="Updates", padding=5, foreground=colors[4], background=colors[0]
+        # ),
         widget.TextBox(
-            text=" ⟳",
-            padding=2,
-            foreground=colors[4],
-            background=colors[0],
-            fontsize=19,
-        ),
-        widget.TextBox(
-            text="Updates", padding=5, foreground=colors[4], background=colors[0]
-        ),
-        widget.TextBox(
-            text=" 🖬",
+            text=" Mem:",
             foreground=colors[3],
             background=colors[0],
             padding=0,
             fontsize=16,
         ),
         widget.Memory(background=colors[0], foreground=colors[3], padding=5),
-        widget.Net(
-            interface="wlp2s0",
-            format="{down} ↓↑ {up}",
-            foreground=colors[5],
-            background=colors[0],
-            padding=5,
-        ),
         widget.TextBox(
             foreground=colors[3], text=" Vol:", background=colors[0], padding=0
         ),
