@@ -367,10 +367,10 @@ def init_widgets_list():
             fontsize=16,
         ),
         widget.Memory(background=colors[0], foreground=colors[3], padding=5),
-        widget.TextBox(
-            foreground=colors[3], text=" Vol:", background=colors[0], padding=0
-        ),
-        widget.Volume(foreground=colors[3], background=colors[0], padding=5),
+        # widget.TextBox(
+        #     foreground=colors[3], text=" Vol:", background=colors[0], padding=0
+        # ),
+        # widget.Volume(foreground=colors[3], background=colors[0], padding=5),
         widget.TextBox(
             foreground=colors[5], text=" UTC:", background=colors[0], padding=0
         ),
@@ -381,6 +381,9 @@ def init_widgets_list():
             timezone="Etc/UTC",
         ),
         widget.Sep(linewidth=0, padding=10, foreground=colors[2], background=colors[0]),
+        widget.TextBox(
+            foreground=colors[2], text=" Sydney:", background=colors[0], padding=0
+        ),
         widget.Clock(
             foreground=colors[2], background=colors[0], format="%A, %B %d  [ %H:%M ]"
         ),
