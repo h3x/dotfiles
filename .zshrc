@@ -14,6 +14,7 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 export PATH="$HOME/Applications:$PATH"
 export PATH="$HOME/.emacs.d/bin:$PATH"
+export PATH="$PATH:/opt/nvim/"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
@@ -38,7 +39,7 @@ alias lg='lazygit'
 alias sb='cd ~/sb'
 alias work='ssh developer1@192.168.20.10'
 
-alias cat='bat'
+alias cat='batcat'
 alias love="/opt/love.app/Contents/MacOS/love"
 
 function f() {
@@ -157,13 +158,13 @@ function nvims() {
 # Alaya
 [ $USER = "developer1" ] &&
 [ -f /home/developer1/dotfiles/.workrc ] && source /home/developer1/dotfiles/.workrc
-
+source ~/dotfiles/.sensitive
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # bindkey -s ^a "nvims\n"
-export EDITOR='/usr/bin/nvim'
+export EDITOR='/opt/nvim'
 
 export SECOND_BRAIN="$HOME/sb"
 
@@ -200,3 +201,4 @@ _fzf_compgen_dir() {
 
 source ~/.fzf-git.sh/fzf-git.sh
 
+eval "$(/home/adam/.local/bin/mise activate zsh)"

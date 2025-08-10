@@ -1,13 +1,16 @@
 return {
   'CopilotC-Nvim/CopilotChat.nvim',
-  branch = 'main',
+
   dependencies = {
     {
       'zbirenbaum/copilot.lua',
+     -- 'github/copilot.vim',
+      url = 'git@github.com:zbirenbaum/copilot.lua.git',
       cmd = 'Copilot',
       event = 'InsertEnter',
       config = function()
         require('copilot').setup {
+         github_token =os.getenv("GITHUB_TOKEN"),
           panel = {
             enabled = true,
             auto_refresh = true,
@@ -26,10 +29,10 @@ return {
           },
         }
       end,
+      opts = {
+                debug=true,
+            },
     }, -- or github/copilot.vim
     { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
-  },
-  opts = {
-    debug = true, -- Enable debugging
   },
 }

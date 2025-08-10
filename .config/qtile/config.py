@@ -17,13 +17,14 @@ from themes.tokyonight_pretty import colors_init
 colors = colors_init()
 
 mod = "mod4"
-# terminal = guess_terminal()
-terminal = "wezterm"
+terminal = guess_terminal()
+# terminal = "wezterm"
 
 
 @hook.subscribe.startup_once
 def autostart_once():
-    subprocess.run("/home/developer1/.config/qtile/autostart.sh")
+    autostart_path = os.path.expanduser("~/.config/qtile/autostart.sh")
+    subprocess.run(autostart_path)
 
 
 keys = [
@@ -34,7 +35,7 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    # Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key(
@@ -355,7 +356,7 @@ def init_widgets_list():
         ),
         widget.Memory(background=colors[0], foreground=colors[3], padding=5),
         widget.Net(
-            interface="wlp9s0",
+            interface="wlp2s0",
             format="{down} ↓↑ {up}",
             foreground=colors[5],
             background=colors[0],
